@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,8 +8,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("click"):
-		var direction = get_global_mouse_position() - global_position
-		direction = direction.normalized()
-		
-		apply_central_impulse(direction * 200)
+	pass
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is BubbleCharacter:
+		var char = body as BubbleCharacter
+		# TODO
+		char.collect_bubble(50)
+		queue_free()
