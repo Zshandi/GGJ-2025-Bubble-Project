@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cij06vhna703f"]
 
 [ext_resource type="Script" path="res://bubble_collectible.gd" id="1_wcy0w"]
-[ext_resource type="Texture2D" uid="uid://bt74lhiqtdnqp" path="res://assets/textures/Bubble-ColorOnly.png" id="2_jvawu"]
-[ext_resource type="Texture2D" uid="uid://bkg4jga733mw7" path="res://assets/textures/Bubble-ShineOnly.png" id="3_klwej"]
+[ext_resource type="Texture2D" uid="uid://bt74lhiqtdnqp" path="res://assets/textures/Bubbles/Bubble-ColorOnly.png" id="2_jvawu"]
+[ext_resource type="Texture2D" uid="uid://bkg4jga733mw7" path="res://assets/textures/Bubbles/Bubble-ShineOnly.png" id="3_klwej"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vmupy"]
 radius = 50.0

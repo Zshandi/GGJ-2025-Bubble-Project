@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://becfinl84qcwe"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_tc0l8"]
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://Tile1.png" id="2_rpg22"]
+[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_rpg22"]
 [ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_mhlb5"]
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_g1f7w"]
 [ext_resource type="PackedScene" uid="uid://moircybc4up5" path="res://object.tscn" id="5_lb13q"]

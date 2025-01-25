@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://m8q2jsflxg1i"]
+[gd_scene load_steps=9 format=3 uid="uid://m8q2jsflxg1i"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_2dqqy"]
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://Tile1.png" id="2_26j6x"]
+[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_26j6x"]
 [ext_resource type="PackedScene" uid="uid://becfinl84qcwe" path="res://Level2.tscn" id="2_jo4lv"]
 [ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_jfmri"]
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_0atvm"]
 [ext_resource type="PackedScene" uid="uid://moircybc4up5" path="res://object.tscn" id="5_77owk"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="7_obx4p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0aa2e"]
+font = ExtResource("7_obx4p")
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_2dqqy")
@@ -83,6 +87,7 @@ offset_top = 292.0
 offset_right = 584.0
 offset_bottom = 315.0
 text = "Click!"
+label_settings = SubResource("LabelSettings_0aa2e")
 
 [node name="Collect!" type="Label" parent="."]
 offset_left = 817.0
