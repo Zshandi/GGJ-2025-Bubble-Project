@@ -1,6 +1,8 @@
 extends Area2D
 class_name BubbleCollectible
 
+signal collected
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%BubbleColor.modulate.h = randf()
@@ -13,6 +15,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var current_size = %BubbleCollision.shape.radius * current_scale
 		
 		character.collect_bubble(current_size)
+		collected.emit()
 		queue_free()
 
 func get_size() -> float:

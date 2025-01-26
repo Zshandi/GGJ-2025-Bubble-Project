@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://l2j87sqqqcn3"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_500sb"]
+[ext_resource type="PackedScene" uid="uid://qijoe2voerx4" path="res://levels/level6.tscn" id="2_aynxt"]
+[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_ibxwi"]
+[ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_qop47"]
+[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_4ffwy"]
+[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="5_my4bb"]
+[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="6_jkaqm"]
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_500sb")
+next_level_scene = ExtResource("2_aynxt")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -1)
+motion_mirroring = Vector2(1500, 1500)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3000.0
+offset_bottom = 3000.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.00163265
+texture = ExtResource("2_ibxwi")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="BubbleCharacter" parent="." instance=ExtResource("3_qop47")]
+unique_name_in_owner = true
+position = Vector2(318, 327)
+
+[node name="BubbleCollectible2" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(625, 284)
+
+[node name="BubbleCollectible4" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(910, 118)
+
+[node name="BubbleCollectible6" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(1108, 372)
+
+[node name="BubbleCollectible7" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(1354, 278)
+
+[node name="BubbleCollectible8" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(1399, 206)
+
+[node name="BubbleCollectible12" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(1599, 82)
+scale = Vector2(3, 3)
+
+[node name="BubbleCollectible13" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(2141, 533)
+scale = Vector2(4, 4)
+
+[node name="BubbleCollectible9" parent="." instance=ExtResource("4_4ffwy")]
+position = Vector2(1455, 147)
+
+[node name="Wall_200x50_" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(165, 428)
+rotation = -1.76381
+
+[node name="Wall_200x50_5" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1191, 162)
+rotation = -1.6526
+
+[node name="Wall_200x50_7" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1476, 565)
+rotation = -1.39239
+
+[node name="Wall_200x50_8" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1780, -54)
+rotation = -1.39239
+
+[node name="Wall_200x50_6" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1257, 36)
+rotation = -1.6526
+
+[node name="Wall_200x50_9" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1572, 600)
+rotation = -0.965094
+
+[node name="Wall_200x50_10" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(1652, 667)
+rotation = -0.526079
+
+[node name="Wall_200x50_4" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(497, 21)
+rotation = -0.238598
+
+[node name="Wall_200x50_3" parent="." instance=ExtResource("5_my4bb")]
+position = Vector2(647, 398)
+rotation = -0.143843
+
+[node name="Wall_400x100_" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(186, 133)
+rotation = -0.11698
+
+[node name="Wall_400x100_2" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(1043, 574)
+rotation = -0.375268
+
+[node name="Wall_400x100_3" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(732, -112)
+rotation = 0.0734363
+
+[node name="Wall_400x100_6" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(1336, -245)
+rotation = 0.0734363
+
+[node name="Wall_400x100_7" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(1925, -124)
+rotation = 0.604421
+
+[node name="Wall_400x100_4" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(888, 654)
+rotation = -1.62741
+
+[node name="Wall_400x100_5" parent="." instance=ExtResource("6_jkaqm")]
+position = Vector2(218, 435)
+rotation = -0.0452589

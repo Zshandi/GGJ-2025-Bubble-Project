@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdp2ouyl3iaqj"]
+[gd_scene load_steps=13 format=3 uid="uid://cdp2ouyl3iaqj"]
 
 [ext_resource type="Script" path="res://bubble_character.gd" id="1_j311j"]
 [ext_resource type="Texture2D" uid="uid://bt74lhiqtdnqp" path="res://assets/textures/Bubbles/Bubble-ColorOnly.png" id="2_hw01v"]
 [ext_resource type="Texture2D" uid="uid://bkg4jga733mw7" path="res://assets/textures/Bubbles/Bubble-ShineOnly.png" id="3_421ty"]
+[ext_resource type="AudioStream" uid="uid://b7e1gcrc0ayax" path="res://assets/sounds/Bubble pop (echo).wav" id="4_4h2g8"]
+[ext_resource type="AudioStream" uid="uid://d3w8ngv721vqr" path="res://assets/sounds/Bubble bloop.wav" id="5_fpmrs"]
+[ext_resource type="AudioStream" uid="uid://bkcsobydf2has" path="res://assets/sounds/Bubble bloop high (echo).wav" id="6_turd1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmubp"]
 friction = 0.0
@@ -37,6 +40,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(2.5, 2.5)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BubbleCollision/Textures/BubbleShine:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.720116, 1, 0.997473, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BubbleCollision/Textures/BubbleColorPop:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BubbleCollision/Textures/BubbleColorPop2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BubbleCollision/Textures/BubbleColorPop2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.02, 0.02)]
+}
 
 [sub_resource type="Animation" id="Animation_p8mip"]
 resource_name = "pop"
@@ -64,6 +115,54 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BubbleCollision/Textures/BubbleShine:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.720116, 1, 0.997473, 1), Color(0.721569, 1, 0.996078, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BubbleCollision/Textures/BubbleColorPop:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BubbleCollision/Textures/BubbleColorPop2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BubbleCollision/Textures/BubbleColorPop2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.02, 0.02), Vector2(0.13, 0.13)]
 }
 
 [sub_resource type="Animation" id="Animation_tcq1d"]
@@ -101,11 +200,10 @@ script = ExtResource("1_j311j")
 
 [node name="BubbleCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vmupy")
 
 [node name="Textures" type="Node2D" parent="BubbleCollision"]
-scale = Vector2(2.6, 2.4)
+scale = Vector2(2.5, 2.5)
 
 [node name="BubbleColor" type="Sprite2D" parent="BubbleCollision/Textures"]
 unique_name_in_owner = true
@@ -119,6 +217,18 @@ modulate = Color(0.720116, 1, 0.997473, 1)
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("3_421ty")
 
+[node name="BubbleColorPop" type="Sprite2D" parent="BubbleCollision/Textures"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_hw01v")
+
+[node name="BubbleColorPop2" type="Sprite2D" parent="BubbleCollision/Textures"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_hw01v")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -126,3 +236,17 @@ reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_352x6")
 }
+
+[node name="AudioPlayer_Pop" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("4_4h2g8")
+
+[node name="AudioPlayer_Move" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_fpmrs")
+
+[node name="AudioPlayer_Collect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_turd1")
+volume_db = 6.029

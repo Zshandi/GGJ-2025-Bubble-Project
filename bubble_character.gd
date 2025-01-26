@@ -22,8 +22,7 @@ var is_starting := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_tree().paused = true
-	process_mode = PROCESS_MODE_ALWAYS
+	freeze = true
 	is_starting = true
 	
 	print_debug("Starting scale: ", %BubbleCollision.global_scale)
@@ -45,14 +44,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("move"):
 		if is_starting:
 			$AnimationPlayer.play("wobble")
-			process_mode = PROCESS_MODE_INHERIT
-			get_tree().paused = false
+			freeze = false
 			is_starting = false
 			started.emit()
 		
 		var direction = get_normalized_direction()
 		
 		apply_central_impulse(direction * bubble_speed)
+		play_sound(%AudioPlayer_Move)
 	
 	if get_colliding_bodies().size() > 0:
 		die()
@@ -65,6 +64,7 @@ func _process(delta: float) -> void:
 			get_tree().root.add_child(bubble)
 			bubble.owner = get_tree().root
 			bubble.global_position = get_global_mouse_position()
+			play_sound(%AudioPlayer_Move)
 		
 		if Input.is_action_just_pressed("reset_size"):
 			%BubbleCollision.scale = starting_scale
@@ -74,9 +74,10 @@ func die():
 	is_dead = true
 	died.emit()
 	get_tree().paused = true
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.5).timeout
 	$AnimationPlayer.process_mode = PROCESS_MODE_ALWAYS
 	$AnimationPlayer.play("pop")
+	%AudioPlayer_Pop.play()
 	await $AnimationPlayer.animation_finished
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = false
@@ -105,3 +106,14 @@ func collect_bubble(size: float):
 	# Change the color as we grow
 	%BubbleColor.modulate.h = fmod(%BubbleColor.modulate.h + size * hue_scale, 1.0)
 	print_debug("New hue: ", %BubbleColor.modulate.h)
+	
+	play_sound(%AudioPlayer_Collect)
+
+func play_sound(base_player:AudioStreamPlayer):
+	# Allow many sounds at the same time
+	var player := base_player.duplicate() as AudioStreamPlayer
+	add_child(player)
+	player.pitch_scale *= randf_range(0.8, 1.2)
+	player.play()
+	await player.finished
+	player.queue_free()

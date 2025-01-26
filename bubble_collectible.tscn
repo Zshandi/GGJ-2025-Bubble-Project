@@ -14,7 +14,7 @@ script = ExtResource("1_wcy0w")
 
 [node name="BubbleCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vmupy")
 
 [node name="Textures" type="Node2D" parent="BubbleCollision"]

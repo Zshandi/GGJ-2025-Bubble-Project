@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://moircybc4up5"]
-
-[ext_resource type="Texture2D" uid="uid://cjsi23cdngqwv" path="res://assets/textures/WhiteMarble/WhiteMarble_COLOR.jpg" id="1_ue20m"]
+[gd_scene load_steps=2 format=3 uid="uid://moircybc4up5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owcmr"]
 
@@ -14,12 +12,3 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
-
-[node name="TextureRect" type="TextureRect" parent="CollisionShape2D"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-texture = ExtResource("1_ue20m")
-expand_mode = 1
-stretch_mode = 1
