@@ -38,7 +38,7 @@ stretch_mode = 1
 
 [node name="BubbleCharacter" parent="." instance=ExtResource("4_fcs1v")]
 unique_name_in_owner = true
-position = Vector2(570, 339)
+position = Vector2(568, 326)
 
 [node name="BubbleCollectible2" parent="." instance=ExtResource("5_4wcu5")]
 position = Vector2(816, -212)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c57vufx02psb"]
+[gd_scene load_steps=12 format=3 uid="uid://c57vufx02psb"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_6wgg8"]
-[ext_resource type="PackedScene" uid="uid://m8q2jsflxg1i" path="res://levels/level1.tscn" id="2_6jn7t"]
 [ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_84cx4"]
 [ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_w27v1"]
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_iduat"]
@@ -26,7 +25,7 @@ font_size = 20
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_6wgg8")
-next_level_scene = ExtResource("2_6jn7t")
+next_level_path = "res://levels/level1.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

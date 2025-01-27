@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Bloopy Bubble"
-config/version="0.0.2"
+config/version="0.0.3"
 run/main_scene="res://levels/level1.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
