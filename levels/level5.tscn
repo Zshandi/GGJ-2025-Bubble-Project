@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://l2j87sqqqcn3"]
+[gd_scene load_steps=10 format=3 uid="uid://l2j87sqqqcn3"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_500sb"]
 [ext_resource type="PackedScene" uid="uid://qijoe2voerx4" path="res://levels/level6.tscn" id="2_aynxt"]
@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_4ffwy"]
 [ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="5_my4bb"]
 [ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="6_jkaqm"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="8_fcf03"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cl5ns"]
+font = ExtResource("8_fcf03")
+font_size = 110
+font_color = Color(0.643137, 1, 1, 1)
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_500sb")
@@ -33,7 +39,7 @@ stretch_mode = 1
 
 [node name="BubbleCharacter" parent="." instance=ExtResource("3_qop47")]
 unique_name_in_owner = true
-position = Vector2(318, 327)
+position = Vector2(2754, 510)
 
 [node name="BubbleCollectible2" parent="." instance=ExtResource("4_4ffwy")]
 position = Vector2(625, 284)
@@ -55,7 +61,7 @@ position = Vector2(1599, 82)
 scale = Vector2(3, 3)
 
 [node name="BubbleCollectible13" parent="." instance=ExtResource("4_4ffwy")]
-position = Vector2(2141, 533)
+position = Vector2(2755, 509)
 scale = Vector2(4, 4)
 
 [node name="BubbleCollectible9" parent="." instance=ExtResource("4_4ffwy")]
@@ -70,11 +76,11 @@ position = Vector2(1191, 162)
 rotation = -1.6526
 
 [node name="Wall_200x50_7" parent="." instance=ExtResource("5_my4bb")]
-position = Vector2(1476, 565)
+position = Vector2(2243, 688)
 rotation = -1.39239
 
 [node name="Wall_200x50_8" parent="." instance=ExtResource("5_my4bb")]
-position = Vector2(1780, -54)
+position = Vector2(1529, -422)
 rotation = -1.39239
 
 [node name="Wall_200x50_6" parent="." instance=ExtResource("5_my4bb")]
@@ -82,11 +88,11 @@ position = Vector2(1257, 36)
 rotation = -1.6526
 
 [node name="Wall_200x50_9" parent="." instance=ExtResource("5_my4bb")]
-position = Vector2(1572, 600)
+position = Vector2(2339, 723)
 rotation = -0.965094
 
 [node name="Wall_200x50_10" parent="." instance=ExtResource("5_my4bb")]
-position = Vector2(1652, 667)
+position = Vector2(2419, 790)
 rotation = -0.526079
 
 [node name="Wall_200x50_4" parent="." instance=ExtResource("5_my4bb")]
@@ -102,7 +108,7 @@ position = Vector2(186, 133)
 rotation = -0.11698
 
 [node name="Wall_400x100_2" parent="." instance=ExtResource("6_jkaqm")]
-position = Vector2(1043, 574)
+position = Vector2(2841, 730)
 rotation = -0.375268
 
 [node name="Wall_400x100_3" parent="." instance=ExtResource("6_jkaqm")]
@@ -114,7 +120,7 @@ position = Vector2(1336, -245)
 rotation = 0.0734363
 
 [node name="Wall_400x100_7" parent="." instance=ExtResource("6_jkaqm")]
-position = Vector2(1925, -124)
+position = Vector2(1943, -592)
 rotation = 0.604421
 
 [node name="Wall_400x100_4" parent="." instance=ExtResource("6_jkaqm")]
@@ -124,3 +130,111 @@ rotation = -1.62741
 [node name="Wall_400x100_5" parent="." instance=ExtResource("6_jkaqm")]
 position = Vector2(218, 435)
 rotation = -0.0452589
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(73, 71)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_left = 2127.0
+offset_top = 134.0
+offset_right = 2152.0
+offset_bottom = 174.0
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+offset_left = 2222.0
+offset_top = 127.0
+offset_right = 2247.0
+offset_bottom = 167.0
+rotation = 0.259717
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D"]
+offset_left = 2319.0
+offset_top = 127.0
+offset_right = 2344.0
+offset_bottom = 167.0
+rotation = 0.671582
+
+[node name="ColorRect4" type="ColorRect" parent="Node2D"]
+offset_left = 2417.0
+offset_top = 128.0
+offset_right = 2442.0
+offset_bottom = 168.0
+rotation = 0.671582
+
+[node name="ColorRect5" type="ColorRect" parent="Node2D"]
+offset_left = 2498.0
+offset_top = 131.0
+offset_right = 2523.0
+offset_bottom = 171.0
+rotation = 0.199298
+
+[node name="ColorRect6" type="ColorRect" parent="Node2D"]
+offset_left = 2643.0
+offset_top = 127.0
+offset_right = 2668.0
+offset_bottom = 167.0
+rotation = 0.199298
+
+[node name="ColorRect8" type="ColorRect" parent="Node2D"]
+offset_left = 2722.0
+offset_top = 132.0
+offset_right = 2747.0
+offset_bottom = 172.0
+rotation = 0.199298
+
+[node name="ColorRect9" type="ColorRect" parent="Node2D"]
+offset_left = 2813.0
+offset_top = 130.0
+offset_right = 2838.0
+offset_bottom = 170.0
+rotation = 0.199298
+
+[node name="ColorRect10" type="ColorRect" parent="Node2D"]
+offset_left = 2872.0
+offset_top = 131.0
+offset_right = 2897.0
+offset_bottom = 171.0
+rotation = 0.199298
+
+[node name="ColorRect11" type="ColorRect" parent="Node2D"]
+offset_left = 2924.0
+offset_top = 132.0
+offset_right = 2949.0
+offset_bottom = 172.0
+rotation = 0.199298
+
+[node name="ColorRect12" type="ColorRect" parent="Node2D"]
+offset_left = 3019.0
+offset_top = 131.0
+offset_right = 3044.0
+offset_bottom = 171.0
+rotation = 0.199298
+
+[node name="ColorRect14" type="ColorRect" parent="Node2D"]
+offset_left = 3227.0
+offset_top = 124.0
+offset_right = 3252.0
+offset_bottom = 164.0
+rotation = 1.00995
+
+[node name="ColorRect13" type="ColorRect" parent="Node2D"]
+offset_left = 3109.0
+offset_top = 128.0
+offset_right = 3134.0
+offset_bottom = 168.0
+rotation = 0.199298
+
+[node name="ColorRect7" type="ColorRect" parent="Node2D"]
+offset_left = 2585.0
+offset_top = 133.0
+offset_right = 2610.0
+offset_bottom = 173.0
+rotation = -0.112654
+
+[node name="Click!" type="Label" parent="Node2D"]
+offset_left = 2114.0
+offset_top = 120.0
+offset_right = 3255.0
+offset_bottom = 231.0
+text = "Bloopy Bubble"
+label_settings = SubResource("LabelSettings_cl5ns")

@@ -226,7 +226,6 @@ rotation = 1.5708
 [node name="Wall_200x50_23" parent="special" instance=ExtResource("5_oj88b")]
 position = Vector2(101, 70)
 rotation = 0.785398
-scale = Vector2(1, 1)
 
 [node name="Wall_200x50_24" parent="special" instance=ExtResource("5_oj88b")]
 position = Vector2(125, -21)
@@ -234,7 +233,6 @@ position = Vector2(125, -21)
 [node name="Wall_200x50_25" parent="special" instance=ExtResource("5_oj88b")]
 position = Vector2(67, -102)
 rotation = -0.775209
-scale = Vector2(1, 1)
 
 [node name="Click!" type="Label" parent="special"]
 offset_left = -122.0

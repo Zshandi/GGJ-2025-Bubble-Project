@@ -104,7 +104,7 @@ func collect_bubble(size: float):
 	print_debug("New scale: ", %BubbleCollision.global_scale)
 	
 	# Change the color as we grow
-	%BubbleColor.modulate.h = fmod(%BubbleColor.modulate.h + size * hue_scale, 1.0)
+	#%BubbleColor.modulate.h = fmod(%BubbleColor.modulate.h + size * hue_scale, 1.0)
 	print_debug("New hue: ", %BubbleColor.modulate.h)
 	
 	play_sound(%AudioPlayer_Collect)
