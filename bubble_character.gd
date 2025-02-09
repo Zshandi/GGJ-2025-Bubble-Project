@@ -12,7 +12,7 @@ var hue_scale := 1.0/345.67
 var bubble_speed := 100.0
 
 @onready
-var starting_scale:Vector2 = %BubbleCollision.scale
+var starting_scale:Vector2 = %Bubble.scale
 
 signal started
 signal died
@@ -25,8 +25,8 @@ func _ready() -> void:
 	freeze = true
 	is_starting = true
 	
-	print_debug("Starting scale: ", %BubbleCollision.global_scale)
-	print_debug("Starting hue: ", %BubbleColor.modulate.h)
+	print_debug("Starting scale: ", %Bubble.global_scale)
+	print_debug("Starting hue: ", %Bubble.color.h)
 	
 	assert(is_equal_approx(0.5, size_to_area(area_to_size(0.5))))
 	assert(is_equal_approx(0.5, area_to_size(size_to_area(0.5))))
@@ -43,7 +43,7 @@ func get_normalized_direction() -> Vector2:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("move"):
 		if is_starting:
-			$AnimationPlayer.play("wobble")
+			%Bubble.start_wobble()
 			freeze = false
 			is_starting = false
 			started.emit()
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 			play_sound(%AudioPlayer_Move)
 		
 		if Input.is_action_just_pressed("reset_size"):
-			%BubbleCollision.scale = starting_scale
+			%Bubble.scale = starting_scale
 
 
 func die():
@@ -75,10 +75,10 @@ func die():
 	died.emit()
 	get_tree().paused = true
 	await get_tree().create_timer(0.5).timeout
-	$AnimationPlayer.process_mode = PROCESS_MODE_ALWAYS
-	$AnimationPlayer.play("pop")
+	%Bubble.process_mode = PROCESS_MODE_ALWAYS
+	%Bubble.pop()
 	%AudioPlayer_Pop.play()
-	await $AnimationPlayer.animation_finished
+	await %Bubble.pop_finished
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = false
 	get_tree().reload_current_scene()
@@ -90,8 +90,8 @@ func area_to_size(area:float) -> float:
 	return pow(area/PI, 1.0/area_pow)
 
 func collect_bubble(size: float):
-	var current_scale = %BubbleCollision.global_scale.x
-	var current_size = %BubbleCollision.shape.radius * current_scale
+	var current_scale = %Bubble.global_scale.x
+	var current_size = %Bubble.shape.radius * current_scale
 	
 	var current_area = size_to_area(current_size)
 	var added_area = size_to_area(size)
@@ -100,12 +100,12 @@ func collect_bubble(size: float):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	%BubbleCollision.global_scale *= new_size / current_size
-	print_debug("New scale: ", %BubbleCollision.global_scale)
+	%Bubble.global_scale *= new_size / current_size
+	print_debug("New scale: ", %Bubble.global_scale)
 	
 	# Change the color as we grow
-	%BubbleColor.modulate.h = fmod(%BubbleColor.modulate.h + size * hue_scale, 1.0)
-	print_debug("New hue: ", %BubbleColor.modulate.h)
+	%Bubble.color.h = fmod(%Bubble.color.h + size * hue_scale, 1.0)
+	print_debug("New hue: ", %Bubble.color.h)
 	
 	play_sound(%AudioPlayer_Collect)
 
