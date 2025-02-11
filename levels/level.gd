@@ -3,9 +3,6 @@ extends Node2D
 @export
 var next_level_scene:PackedScene = null
 
-@export_file("*.tscn")
-var next_level_path:String = ""
-
 @export
 var complete_wait_seconds:float = 1.5
 
@@ -31,9 +28,7 @@ func level_complete():
 	await get_tree().create_timer(complete_wait_seconds).timeout
 	if !%BubbleCharacter.is_dead:
 		completed.emit()
-		#assert(next_level_scene != null)
-		if (next_level_scene == null && next_level_path != ""):
-			next_level_scene = load(next_level_path)
+		assert(next_level_scene != null)
 		if (next_level_scene == null): return
 		var next_level := next_level_scene.instantiate()
 		# Sound transition
