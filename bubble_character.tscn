@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdp2ouyl3iaqj"]
+[gd_scene load_steps=6 format=3 uid="uid://cdp2ouyl3iaqj"]
 
 [ext_resource type="Script" path="res://bubble_character.gd" id="1_j311j"]
 [ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="2_tnuj6"]
-[ext_resource type="AudioStream" uid="uid://b7e1gcrc0ayax" path="res://assets/sounds/Bubble pop (echo).wav" id="4_4h2g8"]
 [ext_resource type="AudioStream" uid="uid://d3w8ngv721vqr" path="res://assets/sounds/Bubble bloop.wav" id="5_fpmrs"]
 [ext_resource type="AudioStream" uid="uid://bkcsobydf2has" path="res://assets/sounds/Bubble bloop high (echo).wav" id="6_turd1"]
 
@@ -24,11 +23,6 @@ script = ExtResource("1_j311j")
 unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="AudioPlayer_Pop" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-process_mode = 3
-stream = ExtResource("4_4h2g8")
 
 [node name="AudioPlayer_Move" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

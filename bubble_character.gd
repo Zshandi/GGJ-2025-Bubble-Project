@@ -40,7 +40,7 @@ func get_normalized_direction() -> Vector2:
 	return direction.normalized()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("move"):
 		if is_starting:
 			%Bubble.start_wobble()
@@ -77,7 +77,6 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	%Bubble.process_mode = PROCESS_MODE_ALWAYS
 	%Bubble.pop()
-	%AudioPlayer_Pop.play()
 	await %Bubble.pop_finished
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = false
