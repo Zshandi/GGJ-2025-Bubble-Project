@@ -14,9 +14,13 @@ var wobble_on_ready := false
 func start_wobble():
 	%AnimationPlayer.play("wobble")
 
-func pop():
+func pop(play_sound:bool = true):
 	%AnimationPlayer.play("pop")
-	%AudioPlayer_Pop.play()
+	if play_sound:
+		%AudioPlayer_Pop.play()
+
+func reset():
+	%AnimationPlayer.play("RESET")
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return

@@ -1,13 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://m8q2jsflxg1i"]
+[gd_scene load_steps=14 format=3 uid="uid://m8q2jsflxg1i"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ggqkc"]
 [ext_resource type="PackedScene" uid="uid://becfinl84qcwe" path="res://levels/level2.tscn" id="2_n5gev"]
+[ext_resource type="Texture2D" uid="uid://ccngbrd524mm5" path="res://assets/icons/pause-icon.png" id="3_fumig"]
 [ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="3_kefub"]
+[ext_resource type="Script" path="res://levels/pause_menu.gd" id="3_m684t"]
 [ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="4_fcs1v"]
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="5_4wcu5"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="5_ckkd0"]
 [ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="6_yk4c4"]
 [ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="7_2b2up"]
 [ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="8_tuykk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1oxk3"]
+font = ExtResource("6_yk4c4")
+font_size = 90
 
 [sub_resource type="LabelSettings" id="LabelSettings_0aa2e"]
 font = ExtResource("6_yk4c4")
@@ -16,6 +23,88 @@ font_size = 30
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_ggqkc")
 next_level_scene = ExtResource("2_n5gev")
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("3_m684t")
+
+[node name="PauseSprite" type="Sprite2D" parent="PauseMenu"]
+unique_name_in_owner = true
+position = Vector2(1824, 84)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_fumig")
+
+[node name="PauseButton" type="Area2D" parent="PauseMenu"]
+position = Vector2(1824, 84)
+
+[node name="BubbleCollision" parent="PauseMenu/PauseButton" instance=ExtResource("5_ckkd0")]
+unique_name_in_owner = true
+color = Color(0.746067, 0.7315, 0.95, 1)
+
+[node name="Pause" type="Control" parent="PauseMenu"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseBackground" type="ColorRect" parent="PauseMenu/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.67, 0.67, 0.67, 0.278431)
+
+[node name="PauseMenu" type="CenterContainer" parent="PauseMenu/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseTitleAndContents" type="VBoxContainer" parent="PauseMenu/Pause/PauseMenu"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Title" type="Label" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents"]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_1oxk3")
+horizontal_alignment = 1
+
+[node name="Contents" type="MarginContainer" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Resume" type="Button" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_yk4c4")
+theme_override_font_sizes/font_size = 42
+text = "Resume"
+
+[node name="QuitToTitle" type="Button" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_yk4c4")
+theme_override_font_sizes/font_size = 42
+text = "Quit to Title"
+
+[node name="RestartLevel" type="Button" parent="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_yk4c4")
+theme_override_font_sizes/font_size = 42
+text = "Restart Level"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -103,5 +192,10 @@ rotation = -0.655755
 position = Vector2(1062, -142)
 rotation = 0.582197
 
+[connection signal="mouse_entered" from="PauseMenu/PauseButton" to="PauseMenu" method="_on_pause_button_mouse_entered"]
+[connection signal="mouse_exited" from="PauseMenu/PauseButton" to="PauseMenu" method="_on_pause_button_mouse_exited"]
+[connection signal="pressed" from="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Resume" to="PauseMenu" method="toggle_paused"]
+[connection signal="pressed" from="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/QuitToTitle" to="PauseMenu" method="_on_quit_to_title_pressed"]
+[connection signal="pressed" from="PauseMenu/Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/RestartLevel" to="PauseMenu" method="_on_restart_level_pressed"]
 [connection signal="started" from="BubbleCharacter" to="Click!" method="queue_free"]
 [connection signal="collected" from="BubbleCollectible5" to="Collect!" method="queue_free"]

@@ -49,7 +49,7 @@ script = ExtResource("2_evp34")
 load_scene_path = "res://levels/title_menu.tscn"
 
 [node name="BubbleCollision" parent="BubbleButton" instance=ExtResource("3_4oe28")]
-scale = Vector2(9, 9)
+scale = Vector2(10, 10)
 color = Color(0.57653, 0.598109, 0.872857, 1)
 wobble_on_ready = true
 

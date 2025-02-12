@@ -39,9 +39,22 @@ func get_normalized_direction() -> Vector2:
 	var direction = -(get_global_mouse_position() - global_position)
 	return direction.normalized()
 
+var move_pressed := false
+var move_just_pressed = false
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("move"):
+		if !move_pressed:
+			move_just_pressed = true
+		move_pressed = true
+	else:
+		move_pressed = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("move"):
+	if move_just_pressed:
+		move_just_pressed = false
+		
 		if is_starting:
 			%Bubble.start_wobble()
 			freeze = false
