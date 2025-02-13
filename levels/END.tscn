@@ -21,7 +21,7 @@ font_size = 25
 [sub_resource type="LabelSettings" id="LabelSettings_qddsd"]
 font_size = 20
 
-[node name="Level_1" type="Node2D"]
+[node name="End" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -53,7 +53,7 @@ scale = Vector2(10, 10)
 color = Color(0.57653, 0.598109, 0.872857, 1)
 wobble_on_ready = true
 
-[node name="Click!" type="Label" parent="."]
+[node name="Heading" type="Label" parent="."]
 offset_left = 554.0
 offset_top = 214.0
 offset_right = 1373.0
@@ -64,7 +64,7 @@ Thanks for Playing!"
 label_settings = SubResource("LabelSettings_1phlx")
 horizontal_alignment = 1
 
-[node name="Click!5" type="Label" parent="."]
+[node name="Designed and Created by" type="Label" parent="."]
 offset_left = 614.112
 offset_top = 479.615
 offset_right = 1251.11
@@ -73,7 +73,7 @@ text = "Designed and Created by"
 label_settings = SubResource("LabelSettings_l72eu")
 horizontal_alignment = 1
 
-[node name="Click!3" type="Label" parent="."]
+[node name="Zshandi Krahn" type="Label" parent="."]
 offset_left = 618.0
 offset_top = 540.0
 offset_right = 1247.0
@@ -82,7 +82,7 @@ text = "Zshandi Krahn"
 label_settings = SubResource("LabelSettings_1phlx")
 horizontal_alignment = 1
 
-[node name="Click!2" type="Label" parent="."]
+[node name="Click to start again" type="Label" parent="."]
 offset_left = 644.0
 offset_top = 893.0
 offset_right = 1281.0
@@ -91,7 +91,7 @@ text = "(click to start again)"
 label_settings = SubResource("LabelSettings_bfhog")
 horizontal_alignment = 1
 
-[node name="Click!4" type="Label" parent="."]
+[node name="Assets Attributions" type="Label" parent="."]
 offset_left = 649.0
 offset_top = 681.0
 offset_right = 1286.0

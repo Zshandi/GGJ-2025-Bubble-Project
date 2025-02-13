@@ -50,6 +50,7 @@ func toggle_paused():
 
 func _ready():
 	# In case I am editing it and forget to re-hide it
+	show()
 	%Pause.hide()
 
 

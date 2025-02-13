@@ -1,255 +1,233 @@
-[gd_scene load_steps=10 format=3 uid="uid://qijoe2voerx4"]
+[gd_scene load_steps=8 format=3 uid="uid://dwigdjfneswe2"]
 
-[ext_resource type="Script" path="res://levels/level.gd" id="1_t06cb"]
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_djxyx"]
+[ext_resource type="PackedScene" uid="uid://b3riarhbbwn8y" path="res://levels/level_base.tscn" id="1_fc2eu"]
+[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="2_1t1tm"]
 [ext_resource type="PackedScene" uid="uid://c57vufx02psb" path="res://levels/END.tscn" id="2_htsx4"]
-[ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_vagdo"]
-[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_n0058"]
-[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="5_oj88b"]
-[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="6_r0s1v"]
-[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="7_hdmtv"]
+[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="3_c2pxj"]
+[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="4_ix82y"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="5_u3vxy"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_paaw7"]
-font = ExtResource("7_hdmtv")
+[sub_resource type="LabelSettings" id="LabelSettings_2wit8"]
+font = ExtResource("5_u3vxy")
 font_size = 30
 
-[node name="Level_1" type="Node2D"]
-script = ExtResource("1_t06cb")
+[node name="Level" instance=ExtResource("1_fc2eu")]
 next_level_scene = ExtResource("2_htsx4")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(0, -1)
-motion_mirroring = Vector2(1500, 1500)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 3005.0
-offset_bottom = 3000.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.00163265
-texture = ExtResource("2_djxyx")
-expand_mode = 2
-stretch_mode = 1
-
-[node name="BubbleCharacter" parent="." instance=ExtResource("3_vagdo")]
-unique_name_in_owner = true
+[node name="BubbleCharacter" parent="." index="2"]
 position = Vector2(-85, 428)
 
-[node name="BubbleCollectible2" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_1t1tm")]
 position = Vector2(92, 357)
 
-[node name="BubbleCollectible4" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible4" parent="." index="4" instance=ExtResource("2_1t1tm")]
 position = Vector2(224, 300)
 scale = Vector2(2, 2)
 
-[node name="BubbleCollectible5" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible5" parent="." index="5" instance=ExtResource("2_1t1tm")]
 position = Vector2(427, 262)
 scale = Vector2(3, 3)
 
-[node name="BubbleCollectible10" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible10" parent="." index="6" instance=ExtResource("2_1t1tm")]
 position = Vector2(690, 238)
 scale = Vector2(4, 4)
 
-[node name="BubbleCollectible11" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible11" parent="." index="7" instance=ExtResource("2_1t1tm")]
 position = Vector2(1026, 235)
 scale = Vector2(5, 5)
 
-[node name="BubbleCollectible12" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible12" parent="." index="8" instance=ExtResource("2_1t1tm")]
 position = Vector2(2366, 427)
 scale = Vector2(5, 5)
 
-[node name="BubbleCollectible13" parent="." instance=ExtResource("4_n0058")]
+[node name="BubbleCollectible13" parent="." index="9" instance=ExtResource("2_1t1tm")]
 position = Vector2(1721, -415)
 scale = Vector2(5, 5)
 
-[node name="Wall_200x50_" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_" parent="." index="10" instance=ExtResource("3_c2pxj")]
 position = Vector2(-207, 538)
 rotation = -1.76381
 
-[node name="Wall_200x50_5" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_5" parent="." index="11" instance=ExtResource("3_c2pxj")]
 position = Vector2(925, 659)
 rotation = 0.681362
 
-[node name="Wall_200x50_7" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_7" parent="." index="12" instance=ExtResource("3_c2pxj")]
 position = Vector2(1476, 725)
 rotation = -1.39239
 
-[node name="Wall_200x50_8" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_8" parent="." index="13" instance=ExtResource("3_c2pxj")]
 position = Vector2(1935, -63)
 rotation = -1.39239
 
-[node name="Wall_200x50_11" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_11" parent="." index="14" instance=ExtResource("3_c2pxj")]
 position = Vector2(3447, -695)
 rotation = -1.39239
 
-[node name="Wall_200x50_12" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_12" parent="." index="15" instance=ExtResource("3_c2pxj")]
 position = Vector2(2870, -938)
 rotation = -1.39239
 
-[node name="Wall_200x50_13" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_13" parent="." index="16" instance=ExtResource("3_c2pxj")]
 position = Vector2(2255, -1086)
 rotation = -1.39239
 
-[node name="Wall_200x50_14" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_14" parent="." index="17" instance=ExtResource("3_c2pxj")]
 position = Vector2(1485, -1116)
 rotation = -1.39239
 
-[node name="Wall_200x50_6" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_6" parent="." index="18" instance=ExtResource("3_c2pxj")]
 position = Vector2(1217, -175)
 rotation = -1.6526
 
-[node name="Wall_200x50_9" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_9" parent="." index="19" instance=ExtResource("3_c2pxj")]
 position = Vector2(1618, 719)
 rotation = -0.965094
 
-[node name="Wall_200x50_15" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_15" parent="." index="20" instance=ExtResource("3_c2pxj")]
 position = Vector2(1958, 1756)
 rotation = -1.44487
 
-[node name="Wall_200x50_16" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_16" parent="." index="21" instance=ExtResource("3_c2pxj")]
 position = Vector2(1970, 2160)
 rotation = -1.58211
 
-[node name="Wall_200x50_10" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_10" parent="." index="22" instance=ExtResource("3_c2pxj")]
 position = Vector2(1745, 791)
 rotation = -0.526079
 
-[node name="Wall_200x50_4" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_4" parent="." index="23" instance=ExtResource("3_c2pxj")]
 position = Vector2(516, -190)
 rotation = -0.238598
 
-[node name="Wall_200x50_3" parent="." instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_3" parent="." index="24" instance=ExtResource("3_c2pxj")]
 position = Vector2(679, 614)
 rotation = 0.105818
 
-[node name="Wall_400x100_" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_" parent="." index="25" instance=ExtResource("4_ix82y")]
 position = Vector2(95, -116)
 rotation = -0.11698
 
-[node name="Wall_400x100_2" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_2" parent="." index="26" instance=ExtResource("4_ix82y")]
 position = Vector2(-206, 582)
 rotation = -0.198054
 
-[node name="Wall_400x100_3" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_3" parent="." index="27" instance=ExtResource("4_ix82y")]
 position = Vector2(722, -305)
 rotation = -0.223166
 
-[node name="Wall_400x100_6" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_6" parent="." index="28" instance=ExtResource("4_ix82y")]
 position = Vector2(1119, 748)
 rotation = 0.0734363
 
-[node name="Wall_400x100_7" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_7" parent="." index="29" instance=ExtResource("4_ix82y")]
 position = Vector2(1423, -340)
 rotation = 0.604421
 
-[node name="Wall_400x100_8" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_8" parent="." index="30" instance=ExtResource("4_ix82y")]
 position = Vector2(2193, -306)
 rotation = 0.604421
 
-[node name="Wall_400x100_12" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_12" parent="." index="31" instance=ExtResource("4_ix82y")]
 position = Vector2(2638, -247)
 rotation = 0.604421
 
-[node name="Wall_400x100_15" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_15" parent="." index="32" instance=ExtResource("4_ix82y")]
 position = Vector2(3057, -1021)
 rotation = 0.604421
 
-[node name="Wall_400x100_16" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_16" parent="." index="33" instance=ExtResource("4_ix82y")]
 position = Vector2(2482, -1291)
 rotation = 0.604421
 
-[node name="Wall_400x100_17" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_17" parent="." index="34" instance=ExtResource("4_ix82y")]
 position = Vector2(1852, -1396)
 rotation = 0.604421
 
-[node name="Wall_400x100_13" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_13" parent="." index="35" instance=ExtResource("4_ix82y")]
 position = Vector2(3172, 588)
 rotation = 0.604421
 
-[node name="Wall_400x100_14" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_14" parent="." index="36" instance=ExtResource("4_ix82y")]
 position = Vector2(3650, 543)
 rotation = -1.56351
 
-[node name="Wall_400x100_18" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_18" parent="." index="37" instance=ExtResource("4_ix82y")]
 position = Vector2(3654, -140)
 rotation = -1.56351
 
-[node name="Wall_400x100_9" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_9" parent="." index="38" instance=ExtResource("4_ix82y")]
 position = Vector2(1945, 805)
 rotation = 0.604421
 
-[node name="Wall_400x100_11" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_11" parent="." index="39" instance=ExtResource("4_ix82y")]
 position = Vector2(1884, 1278)
 rotation = -0.1644
 
-[node name="Wall_400x100_10" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_10" parent="." index="40" instance=ExtResource("4_ix82y")]
 position = Vector2(2693, 1016)
 rotation = -0.262714
 
-[node name="Wall_400x100_4" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_4" parent="." index="41" instance=ExtResource("4_ix82y")]
 position = Vector2(-193, 301)
 rotation = -0.961153
 
-[node name="Wall_400x100_5" parent="." instance=ExtResource("6_r0s1v")]
+[node name="Wall_400x100_5" parent="." index="42" instance=ExtResource("4_ix82y")]
 position = Vector2(276, 504)
 rotation = 0.251948
 
-[node name="special" type="Node2D" parent="."]
+[node name="special" type="Node2D" parent="." index="43"]
 position = Vector2(2386, 3114)
 
-[node name="Wall_200x50_18" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_18" parent="special" index="0" instance=ExtResource("3_c2pxj")]
 position = Vector2(-23, -119)
 rotation = -1.5708
 
-[node name="Wall_200x50_19" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_19" parent="special" index="1" instance=ExtResource("3_c2pxj")]
 position = Vector2(-104, -72)
 rotation = -2.35619
 
-[node name="Wall_200x50_20" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_20" parent="special" index="2" instance=ExtResource("3_c2pxj")]
 position = Vector2(-123, 25)
 rotation = 3.14159
 
-[node name="Wall_200x50_21" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_21" parent="special" index="3" instance=ExtResource("3_c2pxj")]
 position = Vector2(-64, 108)
 rotation = 2.35619
 
-[node name="Wall_200x50_22" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_22" parent="special" index="4" instance=ExtResource("3_c2pxj")]
 position = Vector2(25, 130)
 rotation = 1.5708
 
-[node name="Wall_200x50_23" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_23" parent="special" index="5" instance=ExtResource("3_c2pxj")]
 position = Vector2(101, 70)
 rotation = 0.785398
 
-[node name="Wall_200x50_24" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_24" parent="special" index="6" instance=ExtResource("3_c2pxj")]
 position = Vector2(125, -21)
 
-[node name="Wall_200x50_25" parent="special" instance=ExtResource("5_oj88b")]
+[node name="Wall_200x50_25" parent="special" index="7" instance=ExtResource("3_c2pxj")]
 position = Vector2(67, -102)
 rotation = -0.775209
 
-[node name="Click!" type="Label" parent="special"]
+[node name="Click!" type="Label" parent="special" index="8"]
 offset_left = -122.0
 offset_top = -16.0
 offset_right = 116.0
 offset_bottom = 27.0
 text = "WoW"
-label_settings = SubResource("LabelSettings_paaw7")
+label_settings = SubResource("LabelSettings_2wit8")
 horizontal_alignment = 1
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="Click!2" type="Label" parent="special"]
+[node name="Click!2" type="Label" parent="special" index="9"]
 offset_left = 135.0
 offset_top = 426.0
 offset_right = 373.0
 offset_bottom = 526.0
 text = "How'd you get here?"
-label_settings = SubResource("LabelSettings_paaw7")
+label_settings = SubResource("LabelSettings_2wit8")
 horizontal_alignment = 1
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true

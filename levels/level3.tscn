@@ -1,88 +1,62 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxshrxhdnvvcc"]
+[gd_scene load_steps=6 format=3 uid="uid://dthe5sn2jmyuf"]
 
-[ext_resource type="Script" path="res://levels/level.gd" id="1_vli54"]
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_4n2pl"]
-[ext_resource type="PackedScene" uid="uid://c1c1mewpj5wkp" path="res://levels/level4.tscn" id="2_8rkdk"]
-[ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_bjuep"]
-[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_lrsu6"]
-[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="5_1ld1u"]
-[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="6_crdkh"]
+[ext_resource type="PackedScene" uid="uid://b3riarhbbwn8y" path="res://levels/level_base.tscn" id="1_2vx80"]
+[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="2_4ffl2"]
+[ext_resource type="PackedScene" uid="uid://s304h6b87hbj" path="res://levels/level4.tscn" id="2_8rkdk"]
+[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="3_wq7ij"]
+[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="4_0cj0p"]
 
-[node name="Level_1" type="Node2D"]
-script = ExtResource("1_vli54")
+[node name="Level" instance=ExtResource("1_2vx80")]
 next_level_scene = ExtResource("2_8rkdk")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(0, -1)
-motion_mirroring = Vector2(1500, 1500)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 3000.0
-offset_bottom = 3000.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.00163265
-texture = ExtResource("2_4n2pl")
-expand_mode = 2
-stretch_mode = 1
-
-[node name="BubbleCharacter" parent="." instance=ExtResource("3_bjuep")]
-unique_name_in_owner = true
-position = Vector2(318, 327)
-
-[node name="BubbleCollectible2" parent="." instance=ExtResource("4_lrsu6")]
+[node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_4ffl2")]
 position = Vector2(540, 86)
 
-[node name="BubbleCollectible4" parent="." instance=ExtResource("4_lrsu6")]
+[node name="BubbleCollectible4" parent="." index="4" instance=ExtResource("2_4ffl2")]
 position = Vector2(766, 102)
 
-[node name="BubbleCollectible6" parent="." instance=ExtResource("4_lrsu6")]
+[node name="BubbleCollectible6" parent="." index="5" instance=ExtResource("2_4ffl2")]
 position = Vector2(950, 281)
 
-[node name="BubbleCollectible7" parent="." instance=ExtResource("4_lrsu6")]
+[node name="BubbleCollectible7" parent="." index="6" instance=ExtResource("2_4ffl2")]
 position = Vector2(1253, 179)
 
-[node name="Wall_200x50_" parent="." instance=ExtResource("5_1ld1u")]
+[node name="Wall_200x50_" parent="." index="7" instance=ExtResource("3_wq7ij")]
 position = Vector2(165, 428)
 rotation = -1.76381
 
-[node name="Wall_200x50_5" parent="." instance=ExtResource("5_1ld1u")]
+[node name="Wall_200x50_5" parent="." index="8" instance=ExtResource("3_wq7ij")]
 position = Vector2(1066, 47)
 rotation = -1.6526
 
-[node name="Wall_200x50_6" parent="." instance=ExtResource("5_1ld1u")]
+[node name="Wall_200x50_6" parent="." index="9" instance=ExtResource("3_wq7ij")]
 position = Vector2(1161, 55)
 rotation = -1.6526
 
-[node name="Wall_200x50_4" parent="." instance=ExtResource("5_1ld1u")]
+[node name="Wall_200x50_4" parent="." index="10" instance=ExtResource("3_wq7ij")]
 position = Vector2(1074, 368)
 rotation = -0.238598
 
-[node name="Wall_200x50_3" parent="." instance=ExtResource("5_1ld1u")]
+[node name="Wall_200x50_3" parent="." index="11" instance=ExtResource("3_wq7ij")]
 position = Vector2(639, 422)
 rotation = -1.49707
 
-[node name="Wall_400x100_" parent="." instance=ExtResource("6_crdkh")]
+[node name="Wall_400x100_" parent="." index="12" instance=ExtResource("4_0cj0p")]
 position = Vector2(103, 146)
 rotation = -0.941915
 
-[node name="Wall_400x100_2" parent="." instance=ExtResource("6_crdkh")]
+[node name="Wall_400x100_2" parent="." index="13" instance=ExtResource("4_0cj0p")]
 position = Vector2(744, 430)
 rotation = 0.117284
 
-[node name="Wall_400x100_3" parent="." instance=ExtResource("6_crdkh")]
+[node name="Wall_400x100_3" parent="." index="14" instance=ExtResource("4_0cj0p")]
 position = Vector2(465, -214)
 rotation = 0.0734363
 
-[node name="Wall_400x100_4" parent="." instance=ExtResource("6_crdkh")]
+[node name="Wall_400x100_4" parent="." index="15" instance=ExtResource("4_0cj0p")]
 position = Vector2(915, 88.0001)
 rotation = -1.62741
 
-[node name="Wall_400x100_5" parent="." instance=ExtResource("6_crdkh")]
+[node name="Wall_400x100_5" parent="." index="16" instance=ExtResource("4_0cj0p")]
 position = Vector2(218, 435)
 rotation = -0.0452589
