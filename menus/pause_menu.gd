@@ -57,7 +57,7 @@ func _ready():
 func _on_quit_to_title_pressed() -> void:
 	get_tree().paused = false
 	MusicPlayer.stop()
-	get_tree().change_scene_to_packed(preload("res://levels/title_menu.tscn"))
+	get_tree().change_scene_to_packed(preload("res://menus/title_menu.tscn"))
 
 
 func _on_restart_level_pressed() -> void:

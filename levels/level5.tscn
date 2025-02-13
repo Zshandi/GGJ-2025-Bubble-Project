@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b3riarhbbwn8y" path="res://levels/level_base.tscn" id="1_87uf8"]
 [ext_resource type="PackedScene" uid="uid://dwigdjfneswe2" path="res://levels/level6.tscn" id="2_aynxt"]
-[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="2_dy22c"]
-[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="3_yuras"]
-[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="4_6wgs4"]
+[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://levels/objects/bubble_collectible.tscn" id="2_dy22c"]
+[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://levels/objects/wall_200x50.tscn" id="3_yuras"]
+[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://levels/objects/wall_400x100.tscn" id="4_6wgs4"]
 
 [node name="Level" instance=ExtResource("1_87uf8")]
 next_level_scene = ExtResource("2_aynxt")

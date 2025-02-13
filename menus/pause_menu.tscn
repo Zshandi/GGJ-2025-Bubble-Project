@@ -1,28 +1,28 @@
 [gd_scene load_steps=6 format=3 uid="uid://mibhq02wp3yb"]
 
-[ext_resource type="Script" path="res://levels/pause_menu.gd" id="1_05u6e"]
-[ext_resource type="Texture2D" uid="uid://ccngbrd524mm5" path="res://assets/icons/pause-icon.png" id="2_r7a47"]
-[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="3_78pnc"]
-[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="4_s77dd"]
+[ext_resource type="Script" path="res://menus/pause_menu.gd" id="1_ugo6a"]
+[ext_resource type="Texture2D" uid="uid://ccngbrd524mm5" path="res://assets/icons/pause-icon.png" id="2_e4ac0"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="3_tnv36"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="4_3pfre"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1oxk3"]
-font = ExtResource("4_s77dd")
+font = ExtResource("4_3pfre")
 font_size = 90
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_05u6e")
+script = ExtResource("1_ugo6a")
 
 [node name="PauseSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1824, 84)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_r7a47")
+texture = ExtResource("2_e4ac0")
 
 [node name="PauseButton" type="Area2D" parent="."]
 position = Vector2(1824, 84)
 
-[node name="BubbleCollision" parent="PauseButton" instance=ExtResource("3_78pnc")]
+[node name="BubbleCollision" parent="PauseButton" instance=ExtResource("3_tnv36")]
 unique_name_in_owner = true
 color = Color(0.746067, 0.7315, 0.95, 1)
 
@@ -74,21 +74,21 @@ theme_override_constants/separation = 20
 [node name="Resume" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_s77dd")
+theme_override_fonts/font = ExtResource("4_3pfre")
 theme_override_font_sizes/font_size = 42
 text = "Resume"
 
 [node name="QuitToTitle" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
 custom_minimum_size = Vector2(500, 70)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_s77dd")
+theme_override_fonts/font = ExtResource("4_3pfre")
 theme_override_font_sizes/font_size = 42
 text = "Quit to Title"
 
 [node name="RestartLevel" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
 custom_minimum_size = Vector2(500, 70)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_s77dd")
+theme_override_fonts/font = ExtResource("4_3pfre")
 theme_override_font_sizes/font_size = 42
 text = "Restart Level"
 

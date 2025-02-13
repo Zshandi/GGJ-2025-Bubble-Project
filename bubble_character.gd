@@ -73,7 +73,7 @@ func _process(_delta: float) -> void:
 	if OS.is_debug_build():
 		if Input.is_action_just_pressed("spawn_bubble"):
 			# Spawn a new bubble at cursor
-			var bubble = preload("res://bubble_collectible.tscn").instantiate()
+			var bubble = preload("res://levels/objects/bubble_collectible.tscn").instantiate()
 			get_tree().root.add_child(bubble)
 			bubble.owner = get_tree().root
 			bubble.global_position = get_global_mouse_position()
