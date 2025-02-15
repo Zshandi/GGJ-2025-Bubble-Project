@@ -47,10 +47,13 @@ func toggle_paused():
 		%Pause.hide()
 		is_paused = false
 		get_tree().paused = false
+		_on_settings_back_button_pressed()
 
 func _ready():
-	# In case I am editing it and forget to re-hide it
+	# In case I am editing it and forget to re-set the visibilities
 	show()
+	%Buttons.show()
+	%Settings.hide()
 	%Pause.hide()
 
 
@@ -63,3 +66,15 @@ func _on_quit_to_title_pressed() -> void:
 func _on_restart_level_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+
+func _on_settings_pressed() -> void:
+	%Settings.show()
+	%Buttons.hide()
+	%Title.text = "Settings"
+
+
+func _on_settings_back_button_pressed() -> void:
+	%Settings.hide()
+	%Buttons.show()
+	%Title.text = "Paused"

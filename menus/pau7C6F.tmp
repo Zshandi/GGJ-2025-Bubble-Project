@@ -43,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.15, 0.15, 0.15, 0.784314)
+color = Color(0.67, 0.67, 0.67, 0.278431)
 
 [node name="PauseMenu" type="CenterContainer" parent="Pause"]
 layout_mode = 1
@@ -54,12 +54,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PauseTitleAndContents" type="VBoxContainer" parent="Pause/PauseMenu"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="Title" type="Label" parent="Pause/PauseMenu/PauseTitleAndContents"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Paused"
 label_settings = SubResource("LabelSettings_1oxk3")
@@ -110,69 +109,18 @@ layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("5_c6isd")
 
-[node name="Back" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings"]
-custom_minimum_size = Vector2(500, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3pfre")
-theme_override_font_sizes/font_size = 42
-text = "Back"
-
 [node name="FullscreenToggle" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings"]
 custom_minimum_size = Vector2(500, 70)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_3pfre")
 theme_override_font_sizes/font_size = 42
-text = "Full Screen: Disabled"
-
-[node name="MusicVolume" type="HBoxContainer" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings"]
-layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="MusicVolumeLabel" type="Label" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/MusicVolume"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3pfre")
-theme_override_font_sizes/font_size = 42
-text = "Music"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/MusicVolume"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="SoundVolume" type="HBoxContainer" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings"]
-layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="SoundVolumeLabel" type="Label" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/SoundVolume"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3pfre")
-theme_override_font_sizes/font_size = 42
-text = "Sound
-"
-
-[node name="SoundVolumeSlider" type="HSlider" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/SoundVolume"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.01
-value = 1.0
+toggle_mode = true
+text = "Full Screen: "
 
 [connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
 [connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]
 [connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Resume" to="." method="toggle_paused"]
 [connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/RestartLevel" to="." method="_on_restart_level_pressed"]
-[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Settings" to="." method="_on_restart_level_pressed"]
 [connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/QuitToTitle" to="." method="_on_quit_to_title_pressed"]
-[connection signal="back_button_pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" to="." method="_on_settings_back_button_pressed"]
-[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/Back" to="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" method="_on_back_pressed"]
 [connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/FullscreenToggle" to="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" method="_on_fullscreen_toggle_pressed"]
-[connection signal="value_changed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/MusicVolume/MusicVolumeSlider" to="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" method="_on_music_volume_slider_value_changed"]
-[connection signal="value_changed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings/SoundVolume/SoundVolumeSlider" to="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" method="_on_sound_volume_slider_value_changed"]
