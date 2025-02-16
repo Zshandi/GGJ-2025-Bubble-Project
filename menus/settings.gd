@@ -2,43 +2,49 @@ extends VBoxContainer
 
 signal back_button_pressed
 
-func _ready() -> void:
-	update_full_screen()
-	var music_index = AudioServer.get_bus_index(&"Music")
-	var music_volume = AudioServer.get_bus_volume_db(music_index)
-	%MusicVolumeSlider.set_value_no_signal(db_to_linear(music_volume))
-	var sound_index = AudioServer.get_bus_index(&"Master")
-	var sound_volume = AudioServer.get_bus_volume_db(sound_index)
-	%SoundVolumeSlider.set_value_no_signal(db_to_linear(sound_volume))
+var music_volume:float:
+	get:
+		var index = AudioServer.get_bus_index(&"Music")
+		return db_to_linear(AudioServer.get_bus_volume_db(index))
+	set(value):
+		var index = AudioServer.get_bus_index(&"Music")
+		AudioServer.set_bus_volume_db(index, linear_to_db(value))
 
-func update_full_screen():
-	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+var sound_volume:float:
+	get:
+		var index = AudioServer.get_bus_index(&"Master")
+		return db_to_linear(AudioServer.get_bus_volume_db(index))
+	set(value):
+		var index = AudioServer.get_bus_index(&"Master")
+		AudioServer.set_bus_volume_db(index, linear_to_db(value))
+
+var is_full_screen:bool:
+	get:
+		return DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	set(value):
+		if (value): DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func _ready() -> void:
+	update_full_screen_text()
+	%MusicVolumeSlider.set_value_no_signal(music_volume)
+	%SoundVolumeSlider.set_value_no_signal(sound_volume)
+
+func update_full_screen_text():
+	if is_full_screen:
 		$FullscreenToggle.text = "Full Screen: Enabled"
 	else:
 		$FullscreenToggle.text = "Full Screen: Disabled"
 
 func _on_fullscreen_toggle_pressed() -> void:
-	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	update_full_screen()
+	is_full_screen = !is_full_screen
+	update_full_screen_text()
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	music_volume = value
+
+func _on_sound_volume_slider_value_changed(value: float) -> void:
+	sound_volume = value
 
 func _on_back_pressed() -> void:
 	back_button_pressed.emit()
-
-
-func _on_music_volume_slider_value_changed(value: float) -> void:
-	var music_index = AudioServer.get_bus_index(&"Music")
-	AudioServer.set_bus_volume_db(
-		music_index,
-		linear_to_db(value)
-	)
-
-
-func _on_sound_volume_slider_value_changed(value: float) -> void:
-	var sound_index = AudioServer.get_bus_index(&"Master")
-	AudioServer.set_bus_volume_db(
-		sound_index,
-		linear_to_db(value)
-	)
