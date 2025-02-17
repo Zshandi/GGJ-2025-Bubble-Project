@@ -1,3 +1,4 @@
+@tool
 extends RigidBody2D
 class_name BubbleCharacter
 
@@ -6,7 +7,18 @@ class_name BubbleCharacter
 var area_pow := 2.0
 
 @export
-var hue_scale := 1.0/345.67
+var color_weight := 0.5
+
+@export
+var color := Color.WHITE:
+	get:
+		if is_node_ready():
+			return %Bubble.color
+		return color
+	set(value):
+		color = value
+		if is_node_ready():
+			%Bubble.color = value
 
 @export
 var bubble_speed := 100.0
@@ -22,6 +34,9 @@ var is_starting := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	%Bubble.color = color
+	
+	if Engine.is_editor_hint(): return
 	freeze = true
 	is_starting = true
 	
@@ -43,6 +58,7 @@ var move_pressed := false
 var move_just_pressed = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint(): return
 	if event.is_action_pressed("move"):
 		if !move_pressed:
 			move_just_pressed = true
@@ -52,6 +68,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint(): return
 	if move_just_pressed:
 		move_just_pressed = false
 		
@@ -101,7 +118,15 @@ func size_to_area(radius:float) -> float:
 func area_to_size(area:float) -> float:
 	return pow(area/PI, 1.0/area_pow)
 
-func collect_bubble(size: float):
+func lerp_hue(from:float, to:float, weight:float = 0.5):
+	return from + short_hue_dist(from, to) * weight
+
+func short_hue_dist(from, to):
+	var max_angle = 1.0
+	var difference = fmod(to - from, max_angle)
+	return fmod(2 * difference, max_angle) - difference
+
+func collect_bubble(size: float, bubble:BubbleCollectible):
 	var current_scale = %Bubble.global_scale.x
 	var current_size = %Bubble.shape.radius * current_scale
 	
@@ -115,8 +140,8 @@ func collect_bubble(size: float):
 	%Bubble.global_scale *= new_size / current_size
 	print_debug("New scale: ", %Bubble.global_scale)
 	
-	# Change the color as we grow
-	%Bubble.color.h = fmod(%Bubble.color.h + size * hue_scale, 1.0)
+	# Average the color with the new one
+	color.h = lerp_hue(color.h, bubble.color.h, color_weight)
 	print_debug("New hue: ", %Bubble.color.h)
 	
 	play_sound(%AudioPlayer_Collect)

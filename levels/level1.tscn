@@ -14,6 +14,9 @@ font_size = 30
 [node name="Level" instance=ExtResource("1_vpdsf")]
 next_level_scene = ExtResource("2_bpx3s")
 
+[node name="BubbleCharacter" parent="." index="2"]
+color_weight = null
+
 [node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_jbkk1")]
 position = Vector2(816, -212)
 

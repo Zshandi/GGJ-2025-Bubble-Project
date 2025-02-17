@@ -18,10 +18,11 @@ contact_monitor = true
 max_contacts_reported = 3
 linear_damp = 0.4
 script = ExtResource("1_j311j")
+color = Color(0.61, 0.87, 1, 1)
 
 [node name="Bubble" parent="." instance=ExtResource("2_tnuj6")]
 unique_name_in_owner = true
-color = Color(0.243137, 0.584314, 1, 1)
+color = Color(0.61, 0.87, 1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
