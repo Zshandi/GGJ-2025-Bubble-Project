@@ -9,7 +9,6 @@
 radius = 50.0
 
 [node name="BubbleCollectible" type="Area2D" groups=["LevelPassCollectible"]]
-position = Vector2(900, 190)
 linear_damp = 0.4
 script = ExtResource("1_wcy0w")
 
