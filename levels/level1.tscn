@@ -1,107 +1,78 @@
-[gd_scene load_steps=10 format=3 uid="uid://m8q2jsflxg1i"]
+[gd_scene load_steps=8 format=3 uid="uid://1wh6wuu7823g"]
 
-[ext_resource type="Script" path="res://levels/level.gd" id="1_ggqkc"]
-[ext_resource type="PackedScene" uid="uid://becfinl84qcwe" path="res://levels/level2.tscn" id="2_n5gev"]
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="3_kefub"]
-[ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="4_fcs1v"]
-[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="5_4wcu5"]
-[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="6_yk4c4"]
-[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="7_2b2up"]
-[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://wall_200x50.tscn" id="8_tuykk"]
+[ext_resource type="PackedScene" uid="uid://b3riarhbbwn8y" path="res://levels/level_base.tscn" id="1_vpdsf"]
+[ext_resource type="PackedScene" uid="uid://cudjkkhpujwq0" path="res://levels/level2.tscn" id="2_bpx3s"]
+[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://levels/objects/bubble_collectible.tscn" id="2_jbkk1"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="3_g1pqj"]
+[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://levels/objects/wall_400x100.tscn" id="4_r10x6"]
+[ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://levels/objects/wall_200x50.tscn" id="5_rsndp"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_0aa2e"]
-font = ExtResource("6_yk4c4")
+[sub_resource type="LabelSettings" id="LabelSettings_e7ibl"]
+font = ExtResource("3_g1pqj")
 font_size = 30
 
-[node name="Level_1" type="Node2D"]
-script = ExtResource("1_ggqkc")
-next_level_scene = ExtResource("2_n5gev")
+[node name="Level" instance=ExtResource("1_vpdsf")]
+next_level_scene = ExtResource("2_bpx3s")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(0, -1)
-motion_mirroring = Vector2(1500, 1500)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 3000.0
-offset_bottom = 3000.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.00163265
-texture = ExtResource("3_kefub")
-expand_mode = 2
-stretch_mode = 1
-
-[node name="BubbleCharacter" parent="." instance=ExtResource("4_fcs1v")]
-unique_name_in_owner = true
-position = Vector2(568, 326)
-
-[node name="BubbleCollectible2" parent="." instance=ExtResource("5_4wcu5")]
+[node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_jbkk1")]
 position = Vector2(816, -212)
 
-[node name="BubbleCollectible3" parent="." instance=ExtResource("5_4wcu5")]
+[node name="BubbleCollectible3" parent="." index="4" instance=ExtResource("2_jbkk1")]
 position = Vector2(742, -114)
 
-[node name="BubbleCollectible4" parent="." instance=ExtResource("5_4wcu5")]
+[node name="BubbleCollectible4" parent="." index="5" instance=ExtResource("2_jbkk1")]
 position = Vector2(688, 13)
 
-[node name="BubbleCollectible5" parent="." instance=ExtResource("5_4wcu5")]
+[node name="BubbleCollectible5" parent="." index="6" instance=ExtResource("2_jbkk1")]
 position = Vector2(646, 116)
 
-[node name="Click!" type="Label" parent="."]
+[node name="Click!" type="Label" parent="." index="7"]
 offset_left = 615.0
 offset_top = 257.0
 offset_right = 728.0
 offset_bottom = 298.0
 text = "Click!"
-label_settings = SubResource("LabelSettings_0aa2e")
+label_settings = SubResource("LabelSettings_e7ibl")
 
-[node name="Collect!" type="Label" parent="."]
+[node name="Collect!" type="Label" parent="." index="8"]
 offset_left = 693.0
 offset_top = 60.0
 offset_right = 867.0
 offset_bottom = 101.0
 text = "Collect!"
-label_settings = SubResource("LabelSettings_0aa2e")
+label_settings = SubResource("LabelSettings_e7ibl")
 
-[node name="Wall_400x100_" parent="." instance=ExtResource("7_2b2up")]
+[node name="Wall_400x100_" parent="." index="9" instance=ExtResource("4_r10x6")]
 position = Vector2(330, 323)
 rotation = -1.31228
 
-[node name="Wall_400x100_2" parent="." instance=ExtResource("7_2b2up")]
+[node name="Wall_400x100_2" parent="." index="10" instance=ExtResource("4_r10x6")]
 position = Vector2(445, -84)
 rotation = -0.995497
 
-[node name="Wall_400x100_3" parent="." instance=ExtResource("7_2b2up")]
+[node name="Wall_400x100_3" parent="." index="11" instance=ExtResource("4_r10x6")]
 position = Vector2(1057, 409)
 rotation = -1.30385
 
-[node name="Wall_400x100_5" parent="." instance=ExtResource("7_2b2up")]
+[node name="Wall_400x100_5" parent="." index="12" instance=ExtResource("4_r10x6")]
 position = Vector2(420, 592)
 rotation = -0.508603
 
-[node name="Wall_400x100_4" parent="." instance=ExtResource("7_2b2up")]
+[node name="Wall_400x100_4" parent="." index="13" instance=ExtResource("4_r10x6")]
 position = Vector2(925, -55)
 rotation = -1.43171
 
-[node name="Wall_200x50_" parent="." instance=ExtResource("8_tuykk")]
+[node name="Wall_200x50_" parent="." index="14" instance=ExtResource("5_rsndp")]
 position = Vector2(742, -407)
 
-[node name="Wall_200x50_2" parent="." instance=ExtResource("8_tuykk")]
+[node name="Wall_200x50_2" parent="." index="15" instance=ExtResource("5_rsndp")]
 position = Vector2(422, 349)
 rotation = 0.453356
 
-[node name="Wall_200x50_3" parent="." instance=ExtResource("8_tuykk")]
+[node name="Wall_200x50_3" parent="." index="16" instance=ExtResource("5_rsndp")]
 position = Vector2(838, 438)
 rotation = -0.655755
 
-[node name="Wall_200x50_4" parent="." instance=ExtResource("8_tuykk")]
+[node name="Wall_200x50_4" parent="." index="17" instance=ExtResource("5_rsndp")]
 position = Vector2(1062, -142)
 rotation = 0.582197
-
-[connection signal="started" from="BubbleCharacter" to="Click!" method="queue_free"]
-[connection signal="collected" from="BubbleCollectible5" to="Collect!" method="queue_free"]

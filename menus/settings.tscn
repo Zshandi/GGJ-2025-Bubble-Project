@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfydejf68tu5j"]
+
+[ext_resource type="Script" path="res://menus/settings.gd" id="1_isxf4"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="2_xdk2q"]
+
+[node name="Settings" type="VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+theme_override_constants/separation = 20
+script = ExtResource("1_isxf4")
+
+[node name="Back" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+text = "Back"
+
+[node name="FullscreenToggle" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+text = "Full Screen: Disabled"
+
+[node name="MusicVolume" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MusicVolumeLabel" type="Label" parent="MusicVolume"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+text = "Music"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MusicVolume"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SoundVolume" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="SoundVolumeLabel" type="Label" parent="SoundVolume"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+text = "Sound
+"
+
+[node name="SoundVolumeSlider" type="HSlider" parent="SoundVolume"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="AntiAliasing" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="AntiAliasingLabel" type="Label" parent="AntiAliasing"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+text = "Anti-Aliasing
+"
+
+[node name="AntiAliasingButton" type="OptionButton" parent="AntiAliasing"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_xdk2q")
+theme_override_font_sizes/font_size = 42
+alignment = 1
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="FullscreenToggle" to="." method="_on_fullscreen_toggle_pressed"]
+[connection signal="value_changed" from="MusicVolume/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="SoundVolume/SoundVolumeSlider" to="." method="_on_sound_volume_slider_value_changed"]
+[connection signal="item_selected" from="AntiAliasing/AntiAliasingButton" to="." method="_on_anti_aliasing_button_item_selected"]

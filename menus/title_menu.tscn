@@ -1,0 +1,138 @@
+[gd_scene load_steps=10 format=3 uid="uid://s1caqq5bshwr"]
+
+[ext_resource type="Script" path="res://menus/title_menu.gd" id="1_473on"]
+[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="1_q1h7p"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="2_xhrdw"]
+[ext_resource type="Script" path="res://menus/bubble_button.gd" id="3_6ap3j"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="4_nw0hq"]
+[ext_resource type="PackedScene" uid="uid://cfydejf68tu5j" path="res://menus/settings.tscn" id="6_1d4kf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i03p4"]
+font = ExtResource("2_xhrdw")
+font_size = 105
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwkvl"]
+font = ExtResource("2_xhrdw")
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_4lx2g"]
+font = ExtResource("2_xhrdw")
+font_size = 70
+
+[node name="TitleMenu" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_473on")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -1)
+motion_mirroring = Vector2(1500, 1500)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3000.0
+offset_bottom = 3000.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.00163265
+texture = ExtResource("1_q1h7p")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(970, 221)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_bottom = 90
+
+[node name="Container" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Title" type="Label" parent="CanvasLayer/MarginContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Bloopy Bubble"
+label_settings = SubResource("LabelSettings_i03p4")
+horizontal_alignment = 1
+
+[node name="MainMenu" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_constants/separation = 70
+
+[node name="PlayButton" type="Area2D" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+position = Vector2(535, -320)
+script = ExtResource("3_6ap3j")
+load_scene_path = "res://levels/level1.tscn"
+
+[node name="BubbleCollision" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" instance=ExtResource("4_nw0hq")]
+scale = Vector2(5, 5)
+color = Color(0.243137, 0.584314, 1, 1)
+wobble_on_ready = true
+
+[node name="Play" type="Label" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -47.0
+offset_right = 123.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play!"
+label_settings = SubResource("LabelSettings_xwkvl")
+
+[node name="Settings" type="Button" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xhrdw")
+theme_override_font_sizes/font_size = 42
+text = "Settings
+"
+
+[node name="Exit" type="Button" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xhrdw")
+theme_override_font_sizes/font_size = 42
+text = "Quit Game"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 80
+
+[node name="SettingsTitle" type="Label" parent="CanvasLayer/MarginContainer/Container/SettingsMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Settings"
+label_settings = SubResource("LabelSettings_4lx2g")
+horizontal_alignment = 1
+
+[node name="Settings" parent="CanvasLayer/MarginContainer/Container/SettingsMenu" instance=ExtResource("6_1d4kf")]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" to="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" to="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Container/MainMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Container/MainMenu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="back_button_pressed" from="CanvasLayer/MarginContainer/Container/SettingsMenu/Settings" to="." method="_on_settings_back_button_pressed"]

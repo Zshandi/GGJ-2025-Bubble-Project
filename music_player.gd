@@ -10,11 +10,8 @@ func _ready() -> void:
 	#audio_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().root.add_child.call_deferred(audio_player)
 	audio_player.stream = preload("res://assets/music/whispering-vinyl-loops-lofi-beats-281193.mp3")
+	audio_player.bus = &"Music"
 	audio_player.finished.connect(_audio_player_finished)
-	
-	# TODO: Only play once game is started
-	await audio_player.tree_entered
-	play()
 
 func play() -> void:
 	if !playing:

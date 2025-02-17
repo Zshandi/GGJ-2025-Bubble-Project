@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=3 uid="uid://mibhq02wp3yb"]
+
+[ext_resource type="Script" path="res://menus/pause_menu.gd" id="1_ugo6a"]
+[ext_resource type="Texture2D" uid="uid://ccngbrd524mm5" path="res://assets/icons/pause-icon.png" id="2_e4ac0"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="3_tnv36"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="4_3pfre"]
+[ext_resource type="PackedScene" uid="uid://cfydejf68tu5j" path="res://menus/settings.tscn" id="5_fmh7k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1oxk3"]
+font = ExtResource("4_3pfre")
+font_size = 90
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ugo6a")
+
+[node name="PauseSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1824, 84)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_e4ac0")
+
+[node name="PauseButton" type="Area2D" parent="."]
+position = Vector2(1824, 84)
+
+[node name="BubbleCollision" parent="PauseButton" instance=ExtResource("3_tnv36")]
+unique_name_in_owner = true
+color = Color(0.746067, 0.7315, 0.95, 1)
+
+[node name="Pause" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseBackground" type="ColorRect" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.15, 0.784314)
+
+[node name="PauseMenu" type="CenterContainer" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseTitleAndContents" type="VBoxContainer" parent="Pause/PauseMenu"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Title" type="Label" parent="Pause/PauseMenu/PauseTitleAndContents"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_1oxk3")
+horizontal_alignment = 1
+
+[node name="Contents" type="MarginContainer" parent="Pause/PauseMenu/PauseTitleAndContents"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Pause/PauseMenu/PauseTitleAndContents/Contents"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Resume" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3pfre")
+theme_override_font_sizes/font_size = 42
+text = "Resume"
+
+[node name="RestartLevel" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3pfre")
+theme_override_font_sizes/font_size = 42
+text = "Restart Level"
+
+[node name="Settings" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(500, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3pfre")
+theme_override_font_sizes/font_size = 42
+text = "Settings
+"
+
+[node name="QuitToTitle" type="Button" parent="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3pfre")
+theme_override_font_sizes/font_size = 42
+text = "Quit to Title"
+
+[node name="Settings" parent="Pause/PauseMenu/PauseTitleAndContents/Contents" instance=ExtResource("5_fmh7k")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
+[connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]
+[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Resume" to="." method="toggle_paused"]
+[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/RestartLevel" to="." method="_on_restart_level_pressed"]
+[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Buttons/QuitToTitle" to="." method="_on_quit_to_title_pressed"]
+[connection signal="back_button_pressed" from="Pause/PauseMenu/PauseTitleAndContents/Contents/Settings" to="." method="_on_settings_back_button_pressed"]

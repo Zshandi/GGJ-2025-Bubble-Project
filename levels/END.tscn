@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c57vufx02psb"]
+[gd_scene load_steps=10 format=3 uid="uid://c57vufx02psb"]
 
-[ext_resource type="Script" path="res://levels/level.gd" id="1_6wgg8"]
 [ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_84cx4"]
-[ext_resource type="PackedScene" uid="uid://cdp2ouyl3iaqj" path="res://bubble_character.tscn" id="3_w27v1"]
-[ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://bubble_collectible.tscn" id="4_iduat"]
-[ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://wall_400x100.tscn" id="6_27us2"]
+[ext_resource type="Script" path="res://menus/bubble_button.gd" id="2_evp34"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="3_4oe28"]
 [ext_resource type="AudioStream" uid="uid://cdyrlc4hp7d8m" path="res://assets/sounds/applause.wav" id="7_2laie"]
 [ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="7_80gmw"]
 
@@ -23,9 +21,7 @@ font_size = 25
 [sub_resource type="LabelSettings" id="LabelSettings_qddsd"]
 font_size = 20
 
-[node name="Level_1" type="Node2D"]
-script = ExtResource("1_6wgg8")
-next_level_path = "res://levels/level1.tscn"
+[node name="End" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -47,57 +43,59 @@ texture = ExtResource("2_84cx4")
 expand_mode = 2
 stretch_mode = 1
 
-[node name="BubbleCharacter" parent="." instance=ExtResource("3_w27v1")]
-unique_name_in_owner = true
-position = Vector2(1201, 722)
+[node name="BubbleButton" type="Area2D" parent="."]
+position = Vector2(964, 520)
+script = ExtResource("2_evp34")
+load_scene_path = "res://menus/title_menu.tscn"
 
-[node name="BubbleCollectible2" parent="." instance=ExtResource("4_iduat")]
-position = Vector2(1204, 720)
-scale = Vector2(15, 15)
+[node name="BubbleCollision" parent="BubbleButton" instance=ExtResource("3_4oe28")]
+scale = Vector2(10, 10)
+color = Color(0.57653, 0.598109, 0.872857, 1)
+wobble_on_ready = true
 
-[node name="Click!" type="Label" parent="."]
-offset_left = 794.0
-offset_top = 414.0
-offset_right = 1613.0
-offset_bottom = 649.0
+[node name="Heading" type="Label" parent="."]
+offset_left = 554.0
+offset_top = 214.0
+offset_right = 1373.0
+offset_bottom = 449.0
 text = "That's all for now!
 
 Thanks for Playing!"
 label_settings = SubResource("LabelSettings_1phlx")
 horizontal_alignment = 1
 
-[node name="Click!5" type="Label" parent="."]
-offset_left = 854.112
-offset_top = 679.615
-offset_right = 1491.11
-offset_bottom = 734.615
+[node name="Designed and Created by" type="Label" parent="."]
+offset_left = 614.112
+offset_top = 479.615
+offset_right = 1251.11
+offset_bottom = 534.615
 text = "Designed and Created by"
 label_settings = SubResource("LabelSettings_l72eu")
 horizontal_alignment = 1
 
-[node name="Click!3" type="Label" parent="."]
-offset_left = 858.0
-offset_top = 740.0
-offset_right = 1487.0
-offset_bottom = 823.0
+[node name="Zshandi Krahn" type="Label" parent="."]
+offset_left = 618.0
+offset_top = 540.0
+offset_right = 1247.0
+offset_bottom = 623.0
 text = "Zshandi Krahn"
 label_settings = SubResource("LabelSettings_1phlx")
 horizontal_alignment = 1
 
-[node name="Click!2" type="Label" parent="."]
-offset_left = 884.0
-offset_top = 1093.0
-offset_right = 1521.0
-offset_bottom = 1148.0
+[node name="Click to start again" type="Label" parent="."]
+offset_left = 644.0
+offset_top = 893.0
+offset_right = 1281.0
+offset_bottom = 948.0
 text = "(click to start again)"
 label_settings = SubResource("LabelSettings_bfhog")
 horizontal_alignment = 1
 
-[node name="Click!4" type="Label" parent="."]
-offset_left = 889.0
-offset_top = 881.0
-offset_right = 1526.0
-offset_bottom = 1064.0
+[node name="Assets Attributions" type="Label" parent="."]
+offset_left = 649.0
+offset_top = 681.0
+offset_right = 1286.0
+offset_bottom = 864.0
 text = "Assets Used:
 
 Whispering Vinyl Loops Lofi Beats - By RibhavAgrawal via Pixabay
@@ -108,51 +106,9 @@ Bubble Sounds - Adapted from Clayton's friend Sheldon
 label_settings = SubResource("LabelSettings_qddsd")
 horizontal_alignment = 1
 
-[node name="BubbleCollectible4" parent="." instance=ExtResource("4_iduat")]
-position = Vector2(1197, 1208)
-
 [node name="Applause" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_2laie")
 autoplay = true
 
-[node name="Wall_400x100_" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(218, 2211)
-
-[node name="Wall_400x100_2" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(1024, 2219)
-
-[node name="Wall_400x100_3" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(1757, 2218)
-
-[node name="Wall_400x100_11" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(2225, 1402)
-
-[node name="Wall_400x100_12" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(-207, 1434)
-
-[node name="Wall_400x100_13" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(2233, 1850)
-
-[node name="Wall_400x100_14" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(-199, 1882)
-
-[node name="Wall_400x100_4" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(2210, 827)
-
-[node name="Wall_400x100_5" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(1759, -143)
-
-[node name="Wall_400x100_6" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(993, -144)
-
-[node name="Wall_400x100_7" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(195, -149)
-
-[node name="Wall_400x100_8" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(-186, 855)
-
-[node name="Wall_400x100_9" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(-198, 339)
-
-[node name="Wall_400x100_10" parent="." instance=ExtResource("6_27us2")]
-position = Vector2(2226, 323)
+[connection signal="mouse_entered" from="BubbleButton" to="BubbleButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BubbleButton" to="BubbleButton" method="_on_mouse_exited"]
