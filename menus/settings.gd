@@ -1,3 +1,4 @@
+@tool
 extends VBoxContainer
 
 signal back_button_pressed
@@ -25,11 +26,61 @@ var is_full_screen:bool:
 		if (value): DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
+@export
+# This is an editor-only value used to conveniently clear the data for testing
+var clear_settings:bool:
+	get: return false
+	set(value):
+		print_debug("Deleting settings file...")
+		DirAccess.remove_absolute("user://settings")
+
+enum AntiAliasingSetting
+{
+	NONE, # No anti-aliasing
+	LOW,  # 2x MSAA & Screen Space AA
+	MEDIUM, # 4x MSAA, Screen Space AA, and TAA
+	HIGH # 8x MSAA, Screen Space AA, and TAA
+}
+
+var anti_aliasing := AntiAliasingSetting.NONE:
+	get:
+		return anti_aliasing
+	set(value):
+		anti_aliasing = value
+		match value:
+			AntiAliasingSetting.NONE:
+				get_viewport().use_taa = false
+				get_viewport().msaa_2d = Viewport.MSAA_DISABLED
+				get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+			AntiAliasingSetting.LOW:
+				get_viewport().use_taa = false
+				get_viewport().msaa_2d = Viewport.MSAA_2X
+				get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+			AntiAliasingSetting.MEDIUM:
+				get_viewport().use_taa = true
+				get_viewport().msaa_2d = Viewport.MSAA_4X
+				get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+			AntiAliasingSetting.HIGH:
+				get_viewport().use_taa = true
+				get_viewport().msaa_2d = Viewport.MSAA_8X
+				get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	if OS.has_feature("pc"):
+		# Default to Medium anti-aliasing on Desktop
+		anti_aliasing = AntiAliasingSetting.MEDIUM
+	elif OS.has_feature("web"):
+		# compatibility renderer used for web does not yet support anti-aliasing
+		%AntiAliasing.hide()
+	
 	load_settings()
 	update_full_screen_text()
 	%MusicVolumeSlider.set_value_no_signal(music_volume)
 	%SoundVolumeSlider.set_value_no_signal(sound_volume)
+	%AntiAliasingButton.select(anti_aliasing as int)
 
 func update_full_screen_text():
 	if is_full_screen:
@@ -50,6 +101,10 @@ func _on_sound_volume_slider_value_changed(value: float) -> void:
 	sound_volume = value
 	save_settings()
 
+func _on_anti_aliasing_button_item_selected(index: int) -> void:
+	anti_aliasing = index as AntiAliasingSetting
+	save_settings()
+
 func _on_back_pressed() -> void:
 	back_button_pressed.emit()
 
@@ -59,6 +114,7 @@ func save_settings() -> void:
 	save_dict["music_volume"] = music_volume
 	save_dict["sound_volume"] = sound_volume
 	save_dict["is_full_screen"] = is_full_screen
+	save_dict["anti_aliasing"] = anti_aliasing
 	
 	var save_file := FileAccess.open("user://settings", FileAccess.WRITE)
 	save_file.store_var(save_dict)
@@ -75,3 +131,5 @@ func load_settings() -> void:
 	music_volume = save_dict["music_volume"]
 	sound_volume = save_dict["sound_volume"]
 	is_full_screen = save_dict["is_full_screen"]
+	if save_dict.has("anti_aliasing"):
+		anti_aliasing = save_dict["anti_aliasing"]
