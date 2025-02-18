@@ -118,14 +118,6 @@ func size_to_area(radius:float) -> float:
 func area_to_size(area:float) -> float:
 	return pow(area/PI, 1.0/area_pow)
 
-func lerp_hue(from:float, to:float, weight:float = 0.5):
-	return from + short_hue_dist(from, to) * weight
-
-func short_hue_dist(from, to):
-	var max_angle = 1.0
-	var difference = fmod(to - from, max_angle)
-	return fmod(2 * difference, max_angle) - difference
-
 func collect_bubble(size: float, bubble:BubbleCollectible):
 	var current_scale = %Bubble.global_scale.x
 	var current_size = %Bubble.shape.radius * current_scale
@@ -141,8 +133,11 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	print_debug("New scale: ", %Bubble.global_scale)
 	
 	# Average the color with the new one
-	color.h = lerp_hue(color.h, bubble.color.h, color_weight)
-	print_debug("New hue: ", %Bubble.color.h)
+	color = lerp(color, bubble.color, color_weight)
+	# Restore some saturation and value if they were lost in the lerp
+	color.v = lerp(color.v, bubble.color.v, color_weight)
+	color.s = lerp(color.s, bubble.color.s, color_weight)
+	print_debug("New color: ", color)
 	
 	play_sound(%AudioPlayer_Collect)
 
