@@ -11,15 +11,19 @@ next_level_scene = ExtResource("2_8rkdk")
 
 [node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_4ffl2")]
 position = Vector2(540, 86)
+color = Color(0.675, 0.61, 1, 1)
 
 [node name="BubbleCollectible4" parent="." index="4" instance=ExtResource("2_4ffl2")]
 position = Vector2(766, 102)
+color = Color(1, 0.61, 0.87, 1)
 
 [node name="BubbleCollectible6" parent="." index="5" instance=ExtResource("2_4ffl2")]
 position = Vector2(950, 281)
+color = Color(1, 0.701, 0.61, 1)
 
 [node name="BubbleCollectible7" parent="." index="6" instance=ExtResource("2_4ffl2")]
 position = Vector2(1253, 179)
+color = Color(0.61, 1, 0.8895, 1)
 
 [node name="Wall_200x50_" parent="." index="7" instance=ExtResource("3_wq7ij")]
 position = Vector2(165, 428)

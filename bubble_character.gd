@@ -12,8 +12,6 @@ var color_weight := 0.5
 @export
 var color := Color.WHITE:
 	get:
-		if is_node_ready():
-			return %Bubble.color
 		return color
 	set(value):
 		color = value

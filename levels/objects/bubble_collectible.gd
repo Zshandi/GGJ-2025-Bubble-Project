@@ -7,8 +7,6 @@ signal collected
 @export
 var color := Color.WHITE:
 	get:
-		if is_node_ready():
-			return %BubbleCollision.color
 		return color
 	set(value):
 		color = value
@@ -18,12 +16,24 @@ var color := Color.WHITE:
 @export
 var randomize_color := true
 
+@export
+var animate_hue := false
+
+@export_range(0.0, 1.0, 0.001)
+var hue_shift_per_second := 0.1
+
+func _process(delta: float) -> void:
+	if animate_hue:
+		color.h += hue_shift_per_second * delta
+		%BubbleCollision.color = color
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%BubbleCollision.color = color
 	if Engine.is_editor_hint(): return
 	if randomize_color:
 		color.h = randf()
+		%BubbleCollision.color = color
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is BubbleCharacter:
