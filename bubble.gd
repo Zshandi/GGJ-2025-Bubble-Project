@@ -5,8 +5,12 @@ signal pop_finished
 
 @export
 var color := Color.WHITE:
-	get: return %BubbleColor.modulate
-	set(value): %BubbleColor.modulate = value
+	get:
+		return color
+	set(value):
+		color = value
+		if is_node_ready():
+			%BubbleColor.modulate = value
 
 @export
 var wobble_on_ready := false
@@ -23,12 +27,10 @@ func reset():
 	%AnimationPlayer.play("RESET")
 
 func _ready() -> void:
+	%BubbleColor.modulate = color
 	if Engine.is_editor_hint(): return
 	if wobble_on_ready:
 		start_wobble()
-
-func _process(_delta: float) -> void:
-	pass
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
