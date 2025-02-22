@@ -71,7 +71,6 @@ func _process(_delta: float) -> void:
 		move_just_pressed = false
 		
 		if is_starting:
-			%Bubble.start_wobble()
 			freeze = false
 			is_starting = false
 			started.emit()
@@ -80,6 +79,8 @@ func _process(_delta: float) -> void:
 		
 		apply_central_impulse(direction * bubble_speed)
 		play_sound(%AudioPlayer_Move)
+		
+		add_wobble(direction)
 	
 	if get_colliding_bodies().size() > 0:
 		die()
@@ -97,6 +98,10 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("reset_size"):
 			%Bubble.scale = starting_scale
 
+func add_wobble(direction:Vector2) -> void:
+	%Bubble.add_wobble(-1.2, 85, 0.96, direction)
+	%Bubble.add_wobble(-0.12, 10, 0.99, direction.rotated(PI/8))
+	%Bubble.add_wobble(-0.03, 6, 0.998, direction.rotated(-PI/8))
 
 func die():
 	is_dead = true

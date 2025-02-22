@@ -107,7 +107,7 @@ class Wobble:
 			current_stretch = clampf(current_stretch, -max_stretch, max_stretch)
 			current_speed = 0
 		
-		current_speed -= current_stretch * spring_constant
+		current_speed -= current_stretch * spring_constant * delta
 		current_speed *= attenuation
 	
 	func get_rate_seconds() -> float:
