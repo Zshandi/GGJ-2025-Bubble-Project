@@ -117,7 +117,7 @@ func area_to_size(area:float) -> float:
 	return pow(area/PI, 1.0/area_pow)
 
 func collect_bubble(size: float, bubble:BubbleCollectible):
-	var current_scale = %Bubble.global_scale.x
+	var current_scale = %Bubble.base_scale
 	var current_size = %Bubble.shape.radius * current_scale
 	
 	var current_area = size_to_area(current_size)
@@ -127,7 +127,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	%Bubble.global_scale *= new_size / current_size
+	%Bubble.base_scale *= new_size / current_size
 	print_debug("New scale: ", %Bubble.global_scale)
 	
 	# Average the color with the new one
@@ -136,6 +136,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	color.v = lerp(color.v, bubble.color.v, color_weight)
 	color.s = lerp(color.s, bubble.color.s, color_weight)
 	print_debug("New color: ", color)
+	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
 

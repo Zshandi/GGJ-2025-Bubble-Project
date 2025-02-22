@@ -11,6 +11,7 @@ color = Color(0.65098, 0.611765, 1, 1)
 [node name="BubbleCollision" parent="." instance=ExtResource("4_uqc27")]
 unique_name_in_owner = true
 scale = Vector2(0.6, 0.6)
+base_scale = 0.6
 wobble_on_ready = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
