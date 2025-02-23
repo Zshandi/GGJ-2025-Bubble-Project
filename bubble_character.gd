@@ -22,7 +22,7 @@ var color := Color.WHITE:
 var bubble_speed := 100.0
 
 @onready
-var starting_scale:Vector2 = %Bubble.scale
+var starting_scale:float = %Bubble.base_scale
 
 signal started
 signal died
@@ -96,10 +96,10 @@ func _process(_delta: float) -> void:
 			play_sound(%AudioPlayer_Move)
 		
 		if Input.is_action_just_pressed("reset_size"):
-			%Bubble.scale = starting_scale
+			%Bubble.base_scale = starting_scale
 
 func add_wobble(direction:Vector2) -> void:
-	%Bubble.add_wobble_push(direction, 1)
+	%Bubble.add_wobble_push(direction, 1.0 / (%Bubble.base_scale / starting_scale))
 
 func die():
 	is_dead = true
