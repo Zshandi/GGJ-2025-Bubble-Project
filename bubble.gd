@@ -25,6 +25,9 @@ var wobble_on_ready := false
 @export
 var wobble_anim_scale := 1.0
 
+@export
+var should_print_debug := false
+
 var is_wobbling := false
 var wobble_time := 0.0
 
@@ -75,9 +78,19 @@ func _physics_process(delta: float) -> void:
 	
 	var trans = Transform2D.IDENTITY.scaled(Vector2(base_scale, base_scale))
 	if current_wobbles.size() > 0:
+		var min_wobble_val := 0.0001 / base_scale
+		var to_remove := []
 		for wobble in current_wobbles:
 			wobble._process(delta)
 			trans = add_stretch(trans, wobble.current_stretch, wobble.direction)
+			if abs(wobble.current_speed) + abs(wobble.current_stretch) < min_wobble_val:
+				to_remove.push_back(wobble)
+		
+		for wobble in to_remove:
+			var idx = current_wobbles.find(wobble)
+			current_wobbles.remove_at(idx)
+			if should_print_debug:
+				print_debug("Removing wobble ", wobble, " at current_wobbles[", idx, "]")
 		
 		transform = trans
 	elif not %AnimationPlayer.is_playing():
@@ -131,6 +144,8 @@ func get_speed_for_distance(dist:float, spring_const:float):
 	return sqrt(spring_const * dist * dist)
 
 class Wobble:
+	extends RefCounted
+	
 	var current_stretch := 0.0
 	var current_speed := 0.0
 	
@@ -152,8 +167,6 @@ class Wobble:
 	
 	func get_rate_seconds() -> float:
 		return 2*PI * sqrt(1/spring_constant)
-	
-	
 
 static func attenuation_per_delta(attenuation:float, delta:float) -> float:
 	return 1.0/pow(1.0/attenuation, delta*60)

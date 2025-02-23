@@ -12,3 +12,4 @@ unique_name_in_owner = true
 scale = Vector2(6, 6)
 base_scale = 6.0
 wobble_anim_scale = null
+should_print_debug = null
