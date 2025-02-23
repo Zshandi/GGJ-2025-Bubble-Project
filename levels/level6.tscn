@@ -17,47 +17,61 @@ next_level_scene = ExtResource("2_htsx4")
 [node name="BubbleCharacter" parent="." index="2"]
 position = Vector2(-85, 428)
 
-[node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible2" parent="." index="3" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(92, 357)
 color = Color(0.613333, 1, 0.6, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCharacter")
+show_total_size = true
 
-[node name="BubbleCollectible4" parent="." index="4" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible4" parent="." index="4" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(224, 300)
 scale = Vector2(2, 2)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCollectible2")
+show_total_size = true
 
-[node name="BubbleCollectible5" parent="." index="5" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible5" parent="." index="5" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(427, 262)
 scale = Vector2(3, 3)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCollectible4")
+show_total_size = true
 
-[node name="BubbleCollectible10" parent="." index="6" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible10" parent="." index="6" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(690, 238)
 scale = Vector2(4, 4)
 color = Color(0.964706, 0.6, 1, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCollectible5")
+show_total_size = true
 
-[node name="BubbleCollectible11" parent="." index="7" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible11" parent="." index="7" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(1026, 235)
 scale = Vector2(5, 5)
 color = Color(0.953333, 0.44, 1, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCollectible10")
+show_total_size = true
 
-[node name="BubbleCollectible12" parent="." index="8" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible12" parent="." index="8" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(2366, 427)
 scale = Vector2(5, 5)
 color = Color(0.966481, 0.968396, 0.949346, 1)
 randomize_color = false
+previous_collectible = NodePath("../BubbleCollectible11")
+show_total_size = true
 
-[node name="BubbleCollectible13" parent="." index="9" instance=ExtResource("2_1t1tm")]
+[node name="BubbleCollectible13" parent="." index="9" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
 position = Vector2(1721, -415)
 scale = Vector2(5, 5)
 color = Color(0.46, 0.4, 1, 1)
 animate_hue = true
 hue_shift_per_second = 0.335
+previous_collectible = NodePath("../BubbleCollectible12")
+show_total_size = true
 
 [node name="Wall_200x50_" parent="." index="10" instance=ExtResource("3_c2pxj")]
 position = Vector2(-207, 538)
@@ -140,11 +154,11 @@ position = Vector2(1423, -340)
 rotation = 0.604421
 
 [node name="Wall_400x100_8" parent="." index="30" instance=ExtResource("4_ix82y")]
-position = Vector2(2193, -306)
+position = Vector2(2156, -306)
 rotation = 0.604421
 
 [node name="Wall_400x100_12" parent="." index="31" instance=ExtResource("4_ix82y")]
-position = Vector2(2638, -247)
+position = Vector2(2530, -248)
 rotation = 0.604421
 
 [node name="Wall_400x100_15" parent="." index="32" instance=ExtResource("4_ix82y")]
@@ -160,7 +174,7 @@ position = Vector2(1852, -1396)
 rotation = 0.604421
 
 [node name="Wall_400x100_13" parent="." index="35" instance=ExtResource("4_ix82y")]
-position = Vector2(3172, 588)
+position = Vector2(3177, 597)
 rotation = 0.604421
 
 [node name="Wall_400x100_14" parent="." index="36" instance=ExtResource("4_ix82y")]
