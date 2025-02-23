@@ -26,6 +26,9 @@ var wobble_on_ready := false
 var wobble_anim_scale := 1.0
 
 @export
+var max_stretch := 0.5
+
+@export
 var should_print_debug := false
 
 var is_wobbling := false
@@ -52,13 +55,15 @@ func _ready() -> void:
 		start_wobble()
 
 func add_wobble_push(direction:Vector2, amount:float) -> void:
-	%Bubble.add_wobble(-1.2*amount, 85, 0.96, direction)
+	add_wobble(-1.2*amount, 85, 0.96, direction)
 	var offset1 := randf_range(-PI/8, PI/8)
 	var offset2 := randf_range(-PI/8, PI/8)
 	var rotation1 := randi_range(-1, 1)
 	var rotation2 := randi_range(-1, 1)
-	%Bubble.add_rotating_wobble(-0.08*amount, 10, 0.99, direction.rotated(offset1), rotation1)
-	%Bubble.add_rotating_wobble(-0.015*amount, 6, 0.998, direction.rotated(offset2), rotation2)
+	# We don't want these subtle movements being scaled up too much
+	amount = clampf(amount, 0, 1)
+	add_rotating_wobble(-0.08*amount, 10, 0.99, direction.rotated(offset1), rotation1)
+	add_rotating_wobble(-0.015*amount, 6, 0.998, direction.rotated(offset2), rotation2)
 
 func process_wobble_animation(delta:float) -> void:
 	wobble_time -= delta
@@ -119,6 +124,7 @@ func add_wobble(starting_speed:float, spring_constant:float, attenuation:float, 
 	wobble.spring_constant = spring_constant
 	wobble.attenuation = attenuation
 	wobble.direction = direction
+	wobble.max_stretch = max_stretch
 	current_wobbles.append(wobble)
 	return wobble
 

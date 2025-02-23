@@ -24,6 +24,7 @@ color = Color(0.61, 0.87, 1, 1)
 unique_name_in_owner = true
 color = Color(0.61, 0.87, 1, 1)
 wobble_anim_scale = 1.0
+max_stretch = null
 should_print_debug = false
 
 [node name="Camera2D" type="Camera2D" parent="."]

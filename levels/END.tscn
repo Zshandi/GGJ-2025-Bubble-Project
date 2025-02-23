@@ -47,11 +47,17 @@ stretch_mode = 1
 position = Vector2(964, 520)
 script = ExtResource("2_evp34")
 load_scene_path = "res://menus/title_menu.tscn"
+wobble_push_on_mouse = true
+wobble_push_divisor = 6000
 
 [node name="BubbleCollision" parent="BubbleButton" instance=ExtResource("3_4oe28")]
 scale = Vector2(10, 10)
 color = Color(0.57653, 0.598109, 0.872857, 1)
+base_scale = 10.0
 wobble_on_ready = true
+wobble_anim_scale = 0.2
+max_stretch = 0.2
+should_print_debug = false
 
 [node name="Heading" type="Label" parent="."]
 offset_left = 554.0
