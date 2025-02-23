@@ -21,6 +21,9 @@ var attenuation := 0.9
 @export
 var stretch_direction := Vector2.UP
 
+@export
+var rotation_clockwise := true
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("move"):
 		var direction = (global_position - get_viewport().get_mouse_position()).normalized()
@@ -30,10 +33,7 @@ func _process(delta: float) -> void:
 		add_wobble = false
 	elif start_wobble_rotation:
 		start_wobble_rotation = false
-		%Bubble.add_wobble(starting_speed, spring_constant, attenuation, Vector2.UP)
-		var period = %Bubble.current_wobbles[0].get_rate_seconds()
-		await get_tree().create_timer(period/4).timeout
-		%Bubble.add_wobble(starting_speed, spring_constant, attenuation, Vector2.UP + Vector2.RIGHT)
+		%Bubble.add_rotating_wobble(starting_speed, spring_constant, attenuation, Vector2.UP, rotation_clockwise)
 	elif reset:
 		%Bubble.current_wobbles.clear()
 		reset = false

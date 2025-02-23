@@ -99,9 +99,7 @@ func _process(_delta: float) -> void:
 			%Bubble.scale = starting_scale
 
 func add_wobble(direction:Vector2) -> void:
-	%Bubble.add_wobble(-1.2, 85, 0.96, direction)
-	%Bubble.add_wobble(-0.12, 10, 0.99, direction.rotated(PI/8))
-	%Bubble.add_wobble(-0.03, 6, 0.998, direction.rotated(-PI/8))
+	%Bubble.add_wobble_push(direction, 1)
 
 func die():
 	is_dead = true

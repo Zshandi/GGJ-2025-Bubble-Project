@@ -198,6 +198,7 @@ _data = {
 shape = SubResource("CircleShape2D_vmupy")
 script = ExtResource("1_ram5s")
 color = Color(0.65098, 0.611765, 1, 1)
+wobble_anim_scale = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -82,7 +82,9 @@ load_scene_path = "res://levels/level1.tscn"
 [node name="BubbleCollision" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" instance=ExtResource("4_nw0hq")]
 scale = Vector2(5, 5)
 color = Color(0.41, 0.803333, 1, 1)
+base_scale = 5.0
 wobble_on_ready = true
+wobble_anim_scale = 0.5
 
 [node name="Play" type="Label" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton"]
 anchors_preset = 8
