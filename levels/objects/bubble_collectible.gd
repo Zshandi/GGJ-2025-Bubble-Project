@@ -22,6 +22,18 @@ var animate_hue := false
 @export_range(0.0, 1.0, 0.001)
 var hue_shift_per_second := 0.1
 
+@export
+var previous_collectible:Node2D:
+	set(value):
+		previous_collectible = value
+		queue_redraw()
+
+@export
+var show_total_size:bool:
+	set(value):
+		show_total_size = value
+		queue_redraw()
+
 var wobble_time := 0.0
 
 func _process(delta: float) -> void:
@@ -40,19 +52,29 @@ func _ready() -> void:
 	if randomize_color:
 		color.h = randf()
 		%BubbleCollision.color = color
-	
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is BubbleCharacter:
 		var character = body as BubbleCharacter
 		
-		var current_scale = %BubbleCollision.base_scale * global_scale.x
-		var current_size = %BubbleCollision.shape.radius * current_scale
-		
-		character.collect_bubble(current_size, self)
+		character.collect_bubble(get_radius(), self)
 		collected.emit()
 		queue_free()
 
-func get_size() -> float:
-	var current_scale = %BubbleCollision.global_scale.x
+func _draw() -> void:
+	if !Engine.is_editor_hint(): return
+	if show_total_size:
+		draw_circle(Vector2.ZERO, get_totalled_radius() / global_scale.x, Color.BLACK, false)
+
+func get_radius() -> float:
+	var current_scale = %BubbleCollision.base_scale * global_scale.x
 	return %BubbleCollision.shape.radius * current_scale
+
+func get_totalled_radius() -> float:
+	var area := BubbleCharacter.size_to_area(get_radius())
+	if previous_collectible != null:
+		if previous_collectible.has_method("get_totalled_radius"):
+			area += BubbleCharacter.size_to_area(previous_collectible.get_totalled_radius())
+		elif previous_collectible.has_method("get_radius"):
+			area += BubbleCharacter.size_to_area(previous_collectible.get_radius())
+	return BubbleCharacter.area_to_size(area)

@@ -2,10 +2,6 @@
 extends RigidBody2D
 class_name BubbleCharacter
 
-# Normally this would be 2
-@export
-var area_pow := 2.0
-
 @export
 var color_weight := 0.5
 
@@ -113,15 +109,14 @@ func die():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
-func size_to_area(radius:float) -> float:
-	return PI*pow(radius, area_pow)
+static func size_to_area(radius:float) -> float:
+	return PI*pow(radius, 2)
 
-func area_to_size(area:float) -> float:
-	return pow(area/PI, 1.0/area_pow)
+static func area_to_size(area:float) -> float:
+	return pow(area/PI, 1.0/2)
 
 func collect_bubble(size: float, bubble:BubbleCollectible):
-	var current_scale = %Bubble.base_scale
-	var current_size = %Bubble.shape.radius * current_scale
+	var current_size = get_radius()
 	
 	var current_area = size_to_area(current_size)
 	var added_area = size_to_area(size)
@@ -142,6 +137,9 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
+
+func get_radius() -> float:
+	return %Bubble.shape.radius * %Bubble.base_scale
 
 func play_sound(base_player:AudioStreamPlayer):
 	# Allow many sounds at the same time
