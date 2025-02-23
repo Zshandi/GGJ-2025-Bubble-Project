@@ -49,12 +49,13 @@ randomize_color = false
 [node name="BubbleCollectible12" parent="." index="8" instance=ExtResource("2_1t1tm")]
 position = Vector2(2366, 427)
 scale = Vector2(5, 5)
-color = Color(0.868985, 0.868985, 0.868985, 1)
+color = Color(0.966481, 0.968396, 0.949346, 1)
 randomize_color = false
 
 [node name="BubbleCollectible13" parent="." index="9" instance=ExtResource("2_1t1tm")]
 position = Vector2(1721, -415)
 scale = Vector2(5, 5)
+color = Color(0.46, 0.4, 1, 1)
 animate_hue = true
 hue_shift_per_second = 0.335
 

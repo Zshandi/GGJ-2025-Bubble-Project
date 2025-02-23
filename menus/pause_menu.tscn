@@ -26,6 +26,10 @@ position = Vector2(1824, 84)
 [node name="BubbleCollision" parent="PauseButton" instance=ExtResource("3_tnv36")]
 unique_name_in_owner = true
 color = Color(0.746067, 0.7315, 0.95, 1)
+wobble_on_ready = true
+wobble_anim_scale = 0.75
+max_stretch = 0.5
+should_print_debug = false
 
 [node name="Pause" type="Control" parent="."]
 unique_name_in_owner = true

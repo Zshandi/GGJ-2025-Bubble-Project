@@ -22,7 +22,7 @@ var color := Color.WHITE:
 var bubble_speed := 100.0
 
 @onready
-var starting_scale:Vector2 = %Bubble.scale
+var starting_scale:float = %Bubble.base_scale
 
 signal started
 signal died
@@ -71,7 +71,6 @@ func _process(_delta: float) -> void:
 		move_just_pressed = false
 		
 		if is_starting:
-			%Bubble.start_wobble()
 			freeze = false
 			is_starting = false
 			started.emit()
@@ -80,6 +79,8 @@ func _process(_delta: float) -> void:
 		
 		apply_central_impulse(direction * bubble_speed)
 		play_sound(%AudioPlayer_Move)
+		
+		add_wobble(direction)
 	
 	if get_colliding_bodies().size() > 0:
 		die()
@@ -95,8 +96,10 @@ func _process(_delta: float) -> void:
 			play_sound(%AudioPlayer_Move)
 		
 		if Input.is_action_just_pressed("reset_size"):
-			%Bubble.scale = starting_scale
+			%Bubble.base_scale = starting_scale
 
+func add_wobble(direction:Vector2) -> void:
+	%Bubble.add_wobble_push(direction, 1.0 / (%Bubble.base_scale / starting_scale))
 
 func die():
 	is_dead = true
@@ -117,7 +120,7 @@ func area_to_size(area:float) -> float:
 	return pow(area/PI, 1.0/area_pow)
 
 func collect_bubble(size: float, bubble:BubbleCollectible):
-	var current_scale = %Bubble.global_scale.x
+	var current_scale = %Bubble.base_scale
 	var current_size = %Bubble.shape.radius * current_scale
 	
 	var current_area = size_to_area(current_size)
@@ -127,7 +130,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	%Bubble.global_scale *= new_size / current_size
+	%Bubble.base_scale *= new_size / current_size
 	print_debug("New scale: ", %Bubble.global_scale)
 	
 	# Average the color with the new one
@@ -136,6 +139,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	color.v = lerp(color.v, bubble.color.v, color_weight)
 	color.s = lerp(color.s, bubble.color.s, color_weight)
 	print_debug("New color: ", color)
+	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
 

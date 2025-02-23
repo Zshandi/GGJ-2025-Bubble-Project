@@ -83,3 +83,8 @@ rotation = -0.655755
 [node name="Wall_200x50_4" parent="." index="17" instance=ExtResource("5_rsndp")]
 position = Vector2(1062, -142)
 rotation = 0.582197
+
+[connection signal="started" from="BubbleCharacter" to="Click!" method="hide"]
+[connection signal="collected" from="BubbleCollectible3" to="Collect!" method="hide"]
+[connection signal="collected" from="BubbleCollectible4" to="Collect!" method="hide"]
+[connection signal="collected" from="BubbleCollectible5" to="Collect!" method="hide"]
