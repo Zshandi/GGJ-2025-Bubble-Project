@@ -26,6 +26,9 @@ var animate_hue := false
 var hue_shift_per_second := 0.1
 
 @export
+var is_required_to_complete_level := true
+
+@export
 var previous_collectible:Node2D:
 	set(value):
 		previous_collectible = value

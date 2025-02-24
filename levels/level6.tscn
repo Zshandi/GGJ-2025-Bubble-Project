@@ -21,6 +21,7 @@ position = Vector2(-85, 428)
 position = Vector2(92, 357)
 color = Color(0.613333, 1, 0.6, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCharacter")
 show_total_size = true
 
@@ -29,6 +30,7 @@ position = Vector2(224, 300)
 scale = Vector2(2, 2)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible2")
 show_total_size = true
 
@@ -37,6 +39,7 @@ position = Vector2(427, 262)
 scale = Vector2(3, 3)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible4")
 show_total_size = true
 
@@ -45,6 +48,7 @@ position = Vector2(690, 238)
 scale = Vector2(4, 4)
 color = Color(0.964706, 0.6, 1, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible5")
 show_total_size = true
 
@@ -53,6 +57,7 @@ position = Vector2(1026, 235)
 scale = Vector2(5, 5)
 color = Color(0.953333, 0.44, 1, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible10")
 show_total_size = true
 
@@ -61,17 +66,19 @@ position = Vector2(2366, 427)
 scale = Vector2(5, 5)
 color = Color(0.966481, 0.968396, 0.949346, 1)
 randomize_color = false
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible11")
 show_total_size = true
 
 [node name="BubbleCollectible13" parent="." index="9" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
-position = Vector2(1721, -415)
+position = Vector2(1524, -720)
 scale = Vector2(5, 5)
 color = Color(0.46, 0.4, 1, 1)
 should_mix_color = false
 randomize_color = false
 animate_hue = true
 hue_shift_per_second = 0.335
+is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible12")
 show_total_size = true
 
@@ -84,7 +91,7 @@ position = Vector2(925, 659)
 rotation = 0.681362
 
 [node name="Wall_200x50_7" parent="." index="12" instance=ExtResource("3_c2pxj")]
-position = Vector2(1476, 725)
+position = Vector2(1484, 688)
 rotation = -1.39239
 
 [node name="Wall_200x50_8" parent="." index="13" instance=ExtResource("3_c2pxj")]
@@ -116,98 +123,118 @@ position = Vector2(1618, 719)
 rotation = -0.965094
 
 [node name="Wall_200x50_15" parent="." index="20" instance=ExtResource("3_c2pxj")]
-position = Vector2(1958, 1756)
+position = Vector2(2161, 1639)
 rotation = -1.44487
 
-[node name="Wall_200x50_16" parent="." index="21" instance=ExtResource("3_c2pxj")]
-position = Vector2(1970, 2160)
+[node name="Wall_200x50_17" parent="." index="21" instance=ExtResource("3_c2pxj")]
+position = Vector2(2676, 1632)
+rotation = -1.76476
+
+[node name="Wall_200x50_16" parent="." index="22" instance=ExtResource("3_c2pxj")]
+position = Vector2(2157, 2065)
 rotation = -1.58211
 
-[node name="Wall_200x50_10" parent="." index="22" instance=ExtResource("3_c2pxj")]
+[node name="Wall_200x50_18" parent="." index="23" instance=ExtResource("3_c2pxj")]
+position = Vector2(2694, 2062)
+rotation = -1.58211
+
+[node name="Wall_200x50_19" parent="." index="24" instance=ExtResource("3_c2pxj")]
+position = Vector2(1999, 2339)
+rotation = -0.948613
+
+[node name="Wall_200x50_20" parent="." index="25" instance=ExtResource("3_c2pxj")]
+position = Vector2(2869, 2352)
+rotation = -2.27949
+
+[node name="Wall_200x50_10" parent="." index="26" instance=ExtResource("3_c2pxj")]
 position = Vector2(1745, 791)
 rotation = -0.526079
 
-[node name="Wall_200x50_4" parent="." index="23" instance=ExtResource("3_c2pxj")]
+[node name="Wall_200x50_4" parent="." index="27" instance=ExtResource("3_c2pxj")]
 position = Vector2(516, -190)
 rotation = -0.238598
 
-[node name="Wall_200x50_3" parent="." index="24" instance=ExtResource("3_c2pxj")]
+[node name="Wall_200x50_3" parent="." index="28" instance=ExtResource("3_c2pxj")]
 position = Vector2(679, 614)
 rotation = 0.105818
 
-[node name="Wall_400x100_" parent="." index="25" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_" parent="." index="29" instance=ExtResource("4_ix82y")]
 position = Vector2(95, -116)
 rotation = -0.11698
 
-[node name="Wall_400x100_2" parent="." index="26" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_2" parent="." index="30" instance=ExtResource("4_ix82y")]
 position = Vector2(-206, 582)
 rotation = -0.198054
 
-[node name="Wall_400x100_3" parent="." index="27" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_3" parent="." index="31" instance=ExtResource("4_ix82y")]
 position = Vector2(722, -305)
 rotation = -0.223166
 
-[node name="Wall_400x100_6" parent="." index="28" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_6" parent="." index="32" instance=ExtResource("4_ix82y")]
 position = Vector2(1119, 748)
 rotation = 0.0734363
 
-[node name="Wall_400x100_7" parent="." index="29" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_7" parent="." index="33" instance=ExtResource("4_ix82y")]
 position = Vector2(1423, -340)
 rotation = 0.604421
 
-[node name="Wall_400x100_8" parent="." index="30" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_8" parent="." index="34" instance=ExtResource("4_ix82y")]
 position = Vector2(2156, -306)
 rotation = 0.604421
 
-[node name="Wall_400x100_12" parent="." index="31" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_12" parent="." index="35" instance=ExtResource("4_ix82y")]
 position = Vector2(2530, -248)
 rotation = 0.604421
 
-[node name="Wall_400x100_15" parent="." index="32" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_15" parent="." index="36" instance=ExtResource("4_ix82y")]
 position = Vector2(3057, -1021)
 rotation = 0.604421
 
-[node name="Wall_400x100_16" parent="." index="33" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_16" parent="." index="37" instance=ExtResource("4_ix82y")]
 position = Vector2(2482, -1291)
 rotation = 0.604421
 
-[node name="Wall_400x100_17" parent="." index="34" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_17" parent="." index="38" instance=ExtResource("4_ix82y")]
 position = Vector2(1852, -1396)
 rotation = 0.604421
 
-[node name="Wall_400x100_13" parent="." index="35" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_13" parent="." index="39" instance=ExtResource("4_ix82y")]
 position = Vector2(3177, 597)
 rotation = 0.604421
 
-[node name="Wall_400x100_14" parent="." index="36" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_14" parent="." index="40" instance=ExtResource("4_ix82y")]
 position = Vector2(3650, 543)
 rotation = -1.56351
 
-[node name="Wall_400x100_18" parent="." index="37" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_18" parent="." index="41" instance=ExtResource("4_ix82y")]
 position = Vector2(3654, -140)
 rotation = -1.56351
 
-[node name="Wall_400x100_9" parent="." index="38" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_9" parent="." index="42" instance=ExtResource("4_ix82y")]
 position = Vector2(1945, 805)
 rotation = 0.604421
 
-[node name="Wall_400x100_11" parent="." index="39" instance=ExtResource("4_ix82y")]
-position = Vector2(1884, 1278)
+[node name="Wall_400x100_19" parent="." index="43" instance=ExtResource("4_ix82y")]
+position = Vector2(2727, 1180)
+rotation = 0.604421
+
+[node name="Wall_400x100_11" parent="." index="44" instance=ExtResource("4_ix82y")]
+position = Vector2(1808, 1266)
 rotation = -0.1644
 
-[node name="Wall_400x100_10" parent="." index="40" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_10" parent="." index="45" instance=ExtResource("4_ix82y")]
 position = Vector2(2693, 1016)
 rotation = -0.262714
 
-[node name="Wall_400x100_4" parent="." index="41" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_4" parent="." index="46" instance=ExtResource("4_ix82y")]
 position = Vector2(-193, 301)
 rotation = -0.961153
 
-[node name="Wall_400x100_5" parent="." index="42" instance=ExtResource("4_ix82y")]
+[node name="Wall_400x100_5" parent="." index="47" instance=ExtResource("4_ix82y")]
 position = Vector2(276, 504)
 rotation = 0.251948
 
-[node name="special" type="Node2D" parent="." index="43"]
+[node name="special" type="Node2D" parent="." index="48"]
 position = Vector2(2386, 3114)
 
 [node name="Wall_200x50_18" parent="special" index="0" instance=ExtResource("3_c2pxj")]
@@ -241,18 +268,7 @@ position = Vector2(125, -21)
 position = Vector2(67, -102)
 rotation = -0.775209
 
-[node name="Click!" type="Label" parent="special" index="8"]
-offset_left = -122.0
-offset_top = -16.0
-offset_right = 116.0
-offset_bottom = 27.0
-text = "WoW"
-label_settings = SubResource("LabelSettings_2wit8")
-horizontal_alignment = 1
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Click!2" type="Label" parent="special" index="9"]
+[node name="Click!2" type="Label" parent="special" index="8"]
 offset_left = 135.0
 offset_top = 426.0
 offset_right = 373.0
@@ -262,3 +278,14 @@ label_settings = SubResource("LabelSettings_2wit8")
 horizontal_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="BubbleCollectible14" parent="special" index="9" node_paths=PackedStringArray("previous_collectible") instance=ExtResource("2_1t1tm")]
+scale = Vector2(3, 3)
+color = Color(0.46, 0.4, 1, 1)
+should_mix_color = false
+randomize_color = false
+animate_hue = true
+hue_shift_per_second = 0.4
+is_required_to_complete_level = false
+previous_collectible = NodePath("../../BubbleCharacter")
+show_total_size = true

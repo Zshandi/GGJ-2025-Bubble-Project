@@ -14,10 +14,11 @@ signal completed
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for collectible in get_tree().get_nodes_in_group("LevelPassCollectible"):
-		collectible_count += 1
-		collectible.connect("tree_exited", _collectible_on_tree_exited)
+		if collectible.is_required_to_complete_level:
+			collectible_count += 1
+			collectible.collected.connect(_collectible_on_collected)
 
-func _collectible_on_tree_exited():
+func _collectible_on_collected():
 	collectible_count -= 1
 	if collectible_count <= 0:
 		level_complete()
