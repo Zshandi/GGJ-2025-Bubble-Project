@@ -128,11 +128,14 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	%Bubble.base_scale *= new_size / current_size
 	print_debug("New scale: ", %Bubble.global_scale)
 	
-	# Average the color with the new one
-	color = lerp(color, bubble.color, color_weight)
-	# Restore some saturation and value if they were lost in the lerp
-	color.v = lerp(color.v, bubble.color.v, color_weight)
-	color.s = lerp(color.s, bubble.color.s, color_weight)
+	if bubble.should_mix_color:
+		# Average the color with the new one
+		color = lerp(color, bubble.color, color_weight)
+		# Restore some saturation and value if they were lost in the lerp
+		color.v = lerp(color.v, bubble.color.v, color_weight)
+		color.s = lerp(color.s, bubble.color.s, color_weight)
+	else:
+		color = bubble.color
 	print_debug("New color: ", color)
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	

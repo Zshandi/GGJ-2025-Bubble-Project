@@ -14,6 +14,9 @@ var color := Color.WHITE:
 			%BubbleCollision.color = value
 
 @export
+var should_mix_color := true
+
+@export
 var randomize_color := true
 
 @export
