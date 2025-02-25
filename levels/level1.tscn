@@ -17,33 +17,25 @@ next_level_scene = ExtResource("2_bpx3s")
 [node name="BubbleCollectible2" parent="." index="3" instance=ExtResource("2_jbkk1")]
 position = Vector2(816, -212)
 color = Color(0.844, 0.61, 1, 1)
-should_mix_color = null
 randomize_color = false
-is_required_to_complete_level = null
-show_total_size = null
+is_required_to_complete_level = true
 
 [node name="BubbleCollectible3" parent="." index="4" instance=ExtResource("2_jbkk1")]
 position = Vector2(742, -114)
 color = Color(0.779, 0.61, 1, 1)
-should_mix_color = null
 randomize_color = false
-is_required_to_complete_level = null
-show_total_size = null
+is_required_to_complete_level = true
 
 [node name="BubbleCollectible4" parent="." index="5" instance=ExtResource("2_jbkk1")]
 position = Vector2(688, 13)
 color = Color(0.714, 0.61, 1, 1)
-should_mix_color = null
 randomize_color = false
-is_required_to_complete_level = null
-show_total_size = null
+is_required_to_complete_level = true
 
 [node name="BubbleCollectible5" parent="." index="6" instance=ExtResource("2_jbkk1")]
 position = Vector2(646, 116)
-should_mix_color = null
 randomize_color = false
-is_required_to_complete_level = null
-show_total_size = null
+is_required_to_complete_level = true
 
 [node name="Click!" type="Label" parent="." index="7"]
 offset_left = 615.0
