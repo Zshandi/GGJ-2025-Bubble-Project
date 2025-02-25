@@ -17,6 +17,9 @@ var color := Color.WHITE:
 @export
 var bubble_speed := 100.0
 
+@export
+var bubble_combine_duration := 0.1
+
 @onready
 var starting_scale:float = %Bubble.base_scale
 
@@ -144,9 +147,29 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	# Animate the size and color
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(%Bubble, "base_scale", new_scale, 0.1)
-	tween.tween_property(self, "color", new_color, 0.1)
+	tween.tween_property(%Bubble, "base_scale", new_scale, bubble_combine_duration)
+	tween.tween_property(self, "color", new_color, bubble_combine_duration)
 	tween.play()
+	
+	# Calculate an impulse to apply
+	# TODO: Use acceleration instead of impulse, so it's more smooth
+	var desired_movement := (bubble.global_position - global_position).normalized() * size / 2
+	var required_speed := desired_movement / bubble_combine_duration
+	var impulse := required_speed * mass
+	# Apply the impulse, then apply the opposite after the duration to cancel out
+	apply_impulse(impulse)
+	get_tree().create_timer(bubble_combine_duration, false).timeout.connect(func():
+		apply_impulse(-impulse * 0.8)
+		)
+	
+	# Calculate a stretch amount
+	var desired_stretch_distance := size / 3
+	var required_stretch_percent:float = desired_stretch_distance / get_radius()
+	var stretch_direction := (bubble.global_position - global_position).normalized()
+	var spring_const := Bubble.get_spring_constant_for_period(bubble_combine_duration*4)
+	var starting_speed := Bubble.get_speed_for_distance(required_stretch_percent, spring_const)
+	%Bubble.add_wobble(starting_speed, spring_const, 0.8, stretch_direction)
+	
 
 func get_radius() -> float:
 	return %Bubble.shape.radius * %Bubble.base_scale

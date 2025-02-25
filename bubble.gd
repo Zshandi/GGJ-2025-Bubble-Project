@@ -137,13 +137,13 @@ func add_rotating_wobble(starting_speed:float, spring_constant:float, attenuatio
 	await get_tree().create_timer(delay).timeout
 	add_wobble(second_starting_speed, spring_constant, attenuation, direction.rotated(rotation_dir*PI/4))
 
-func get_spring_constant_for_period(period:float):
+static func get_spring_constant_for_period(period:float) -> float:
 	# period = 2*PI * sqrt(1/spring_constant)
 	# (period / (2*PI))^2 = 1/spring_constant
 	# spring_constant = 1/(period / (2*PI))^2
 	return 1.0 / pow(period / (2*PI), 2)
 
-func get_speed_for_distance(dist:float, spring_const:float):
+static func get_speed_for_distance(dist:float, spring_const:float) -> float:
 	# (1/2)mv^2 = (1/2)kx^2 (from Google)
 	# v = sqrt(kx^2/m), but m is 1, so
 	# v = sqrt(kx^2)
