@@ -125,21 +125,28 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	%Bubble.base_scale *= new_size / current_size
+	var new_scale = %Bubble.base_scale * new_size / current_size
 	print_debug("New scale: ", %Bubble.global_scale)
 	
+	var new_color = color
 	if bubble.should_mix_color:
 		# Average the color with the new one
-		color = lerp(color, bubble.color, color_weight)
+		new_color = lerp(color, bubble.color, color_weight)
 		# Restore some saturation and value if they were lost in the lerp
-		color.v = lerp(color.v, bubble.color.v, color_weight)
-		color.s = lerp(color.s, bubble.color.s, color_weight)
+		new_color.v = lerp(color.v, bubble.color.v, color_weight)
+		new_color.s = lerp(color.s, bubble.color.s, color_weight)
 	else:
-		color = bubble.color
+		new_color = bubble.color
 	print_debug("New color: ", color)
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
+	
+	# Animate the size and color
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(%Bubble, "base_scale", new_scale, 0.1)
+	tween.tween_property(self, "color", new_color, 0.1)
+	tween.play()
 
 func get_radius() -> float:
 	return %Bubble.shape.radius * %Bubble.base_scale
