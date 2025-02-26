@@ -17,7 +17,7 @@ var color := Color.WHITE:
 @export
 var bubble_speed := 100.0
 
-var min_combine_duration := 0.08
+var min_combine_duration := 0.13
 var max_combine_duration := 0.25
 var min_combine_radius := 30.0
 var max_combine_radius := 150.0
@@ -162,15 +162,32 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	tween.tween_property(self, "color", new_color, bubble_combine_duration)
 	tween.play()
 	
-	# Calculate an impulse to apply
-	# TODO: Use acceleration instead of impulse, so it's more smooth
+	# Calculate an acceleration & deceleration
+	# d = v * t + (1/2) * a * t²
+	# d - v * t = (1/2) * a * t²
+	# 2(d - v * t) / t² = a
+	# Where v is the current speed (presumably toward the collected bubble)
+	#	d is the distance (in this case, 1/2 the distance, since we're speeding then slowing)
+	#	and t is the time (in this case, 1/2 the time, same deal)
+	# These 1/2 cancel with the 2, leaving us with
 	var desired_movement := (bubble.global_position - global_position).normalized() * size / 2
-	var required_speed := desired_movement / bubble_combine_duration
-	var impulse := required_speed * mass
-	# Apply the impulse, then apply the opposite after the duration to cancel out
-	apply_impulse(impulse)
-	get_tree().create_timer(bubble_combine_duration, false).timeout.connect(func():
-		apply_impulse(-impulse * 0.8)
+	var distance := desired_movement.length()
+	var time := bubble_combine_duration
+	var current_speed := linear_velocity.project(desired_movement).length()
+	# (d - v * t) / (t/2)² = a
+	var accel_amount := (distance - (current_speed * time)) / pow(time/2, 2)
+	var accel := accel_amount * desired_movement.normalized()
+	var force := accel * mass # mass is currently just 1, but that could change
+	
+	# Apply the acceleration, then deceleration
+	# Final accel is slightly lower to account for air resistance
+	add_constant_central_force(force)
+	get_tree().create_timer(bubble_combine_duration/2, false).timeout.connect(func():
+		add_constant_central_force(-force)
+		add_constant_central_force(-force*0.9)
+		get_tree().create_timer(bubble_combine_duration/2, false).timeout.connect(func():
+			add_constant_central_force(force*0.9)
+			)
 		)
 	
 	# Calculate a stretch amount
