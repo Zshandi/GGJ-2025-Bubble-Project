@@ -163,19 +163,15 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	tween.play()
 	
 	# Calculate an acceleration & deceleration
-	# d = v * t + (1/2) * a * t²
-	# d - v * t = (1/2) * a * t²
-	# 2(d - v * t) / t² = a
-	# Where v is the current speed (presumably toward the collected bubble)
-	#	d is the distance (in this case, 1/2 the distance, since we're speeding then slowing)
-	#	and t is the time (in this case, 1/2 the time, same deal)
-	# These 1/2 cancel with the 2, leaving us with
+	# d = (1/2) * a * t²
+	# d = (1/2) * a * t²
+	# 2*d / t² = a
+	# Where d is distance (in this case, 1/2 the distance, since we're speeding then slowing)
+	#	and t is time (in this case, 1/2 the time, same deal)
 	var desired_movement := (bubble.global_position - global_position).normalized() * size / 2
-	var distance := desired_movement.length()
-	var time := bubble_combine_duration
-	var current_speed := linear_velocity.project(desired_movement).length()
-	# (d - v * t) / (t/2)² = a
-	var accel_amount := (distance - (current_speed * time)) / pow(time/2, 2)
+	var distance := desired_movement.length()/2
+	var time := bubble_combine_duration/2
+	var accel_amount := 2*distance / pow(time, 2)
 	var accel := accel_amount * desired_movement.normalized()
 	var force := accel * mass # mass is currently just 1, but that could change
 	
