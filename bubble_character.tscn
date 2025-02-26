@@ -19,7 +19,6 @@ max_contacts_reported = 3
 linear_damp = 0.4
 script = ExtResource("1_j311j")
 color = Color(0.61, 0.87, 1, 1)
-bubble_combine_duration = 0.12
 
 [node name="Bubble" parent="." instance=ExtResource("2_tnuj6")]
 unique_name_in_owner = true

@@ -17,11 +17,16 @@ var color := Color.WHITE:
 @export
 var bubble_speed := 100.0
 
-@export
-var bubble_combine_duration := 0.1
+var min_combine_duration := 0.08
+var max_combine_duration := 0.25
+var min_combine_radius := 30.0
+var max_combine_radius := 150.0
 
 @onready
 var starting_scale:float = %Bubble.base_scale
+
+@onready
+var current_scale:float = %Bubble.base_scale
 
 signal started
 signal died
@@ -128,8 +133,9 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	var new_scale = %Bubble.base_scale * new_size / current_size
-	print_debug("New scale: ", %Bubble.global_scale)
+	var new_scale = current_scale * new_size / current_size
+	current_scale = new_scale
+	print_debug("New scale: ", new_scale)
 	
 	var new_color = color
 	if bubble.should_mix_color:
@@ -144,6 +150,11 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
+	
+	var combine_duration_scale := (size - min_combine_radius) / (max_combine_radius - min_combine_radius)
+	var bubble_combine_duration := lerpf(min_combine_duration, max_combine_duration, combine_duration_scale)
+	bubble_combine_duration = clampf(bubble_combine_duration, min_combine_duration, max_combine_duration)
+	print_debug("Combine duration: ", bubble_combine_duration)
 	
 	# Animate the size and color
 	var tween = create_tween().set_parallel(true)
@@ -172,7 +183,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 
 func get_radius() -> float:
-	return %Bubble.shape.radius * %Bubble.base_scale
+	return %Bubble.shape.radius * current_scale
 
 func play_sound(base_player:AudioStreamPlayer):
 	# Allow many sounds at the same time
