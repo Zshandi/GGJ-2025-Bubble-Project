@@ -21,7 +21,6 @@ position = Vector2(-85, 428)
 position = Vector2(92, 357)
 color = Color(0.613333, 1, 0.6, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCharacter")
 show_total_size = true
 
@@ -30,7 +29,6 @@ position = Vector2(224, 300)
 scale = Vector2(2, 2)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible2")
 show_total_size = true
 
@@ -39,7 +37,6 @@ position = Vector2(427, 262)
 scale = Vector2(3, 3)
 color = Color(0.611765, 1, 0.6, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible4")
 show_total_size = true
 
@@ -48,7 +45,6 @@ position = Vector2(690, 238)
 scale = Vector2(4, 4)
 color = Color(0.964706, 0.6, 1, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible5")
 show_total_size = true
 
@@ -57,7 +53,6 @@ position = Vector2(1026, 235)
 scale = Vector2(5, 5)
 color = Color(0.953333, 0.44, 1, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible10")
 show_total_size = true
 
@@ -66,7 +61,6 @@ position = Vector2(2366, 427)
 scale = Vector2(5, 5)
 color = Color(0.966481, 0.968396, 0.949346, 1)
 randomize_color = false
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible11")
 show_total_size = true
 
@@ -78,7 +72,6 @@ should_mix_color = false
 randomize_color = false
 animate_hue = true
 hue_shift_per_second = 0.335
-is_required_to_complete_level = null
 previous_collectible = NodePath("../BubbleCollectible12")
 show_total_size = true
 
@@ -285,7 +278,7 @@ color = Color(0.46, 0.4, 1, 1)
 should_mix_color = false
 randomize_color = false
 animate_hue = true
-hue_shift_per_second = 0.4
+hue_shift_per_second = 1.0
 is_required_to_complete_level = false
 previous_collectible = NodePath("../../BubbleCharacter")
 show_total_size = true

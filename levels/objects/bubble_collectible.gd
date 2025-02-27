@@ -44,8 +44,6 @@ var wobble_time := 0.0
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
-	if get_tree().current_scene == self:
-		position = Vector2(500, 500)
 	
 	if animate_hue:
 		color.h += hue_shift_per_second * delta
@@ -65,7 +63,21 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		character.collect_bubble(get_radius(), self)
 		collected.emit()
-		queue_free()
+		
+		animate_collected(character)
+
+func animate_collected(character:BubbleCharacter) -> void:
+	var desired_movement := (character.global_position - global_position).normalized() * get_radius() / 2
+	var new_position := position + desired_movement
+	var tween := create_tween().set_parallel()
+	# 0.12 is the shortest duration of the character's animation
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.12)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", new_position, 0.12)
+	tween.play()
+	
+	await tween.finished
+	queue_free()
 
 func _draw() -> void:
 	if !Engine.is_editor_hint(): return

@@ -17,8 +17,16 @@ var color := Color.WHITE:
 @export
 var bubble_speed := 100.0
 
+var min_combine_duration := 0.13
+var max_combine_duration := 0.25
+var min_combine_radius := 30.0
+var max_combine_radius := 150.0
+
 @onready
 var starting_scale:float = %Bubble.base_scale
+
+@onready
+var current_scale:float = %Bubble.base_scale
 
 signal started
 signal died
@@ -125,24 +133,70 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	
 	print_debug("new_size: ", new_size, ", current_size: ", current_size)
 	
-	%Bubble.base_scale *= new_size / current_size
-	print_debug("New scale: ", %Bubble.global_scale)
+	var new_scale = current_scale * new_size / current_size
+	current_scale = new_scale
+	print_debug("New scale: ", new_scale)
 	
+	var new_color = color
 	if bubble.should_mix_color:
 		# Average the color with the new one
-		color = lerp(color, bubble.color, color_weight)
+		new_color = lerp(color, bubble.color, color_weight)
 		# Restore some saturation and value if they were lost in the lerp
-		color.v = lerp(color.v, bubble.color.v, color_weight)
-		color.s = lerp(color.s, bubble.color.s, color_weight)
+		new_color.v = lerp(color.v, bubble.color.v, color_weight)
+		new_color.s = lerp(color.s, bubble.color.s, color_weight)
 	else:
-		color = bubble.color
+		new_color = bubble.color
 	print_debug("New color: ", color)
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
 	play_sound(%AudioPlayer_Collect)
+	
+	var combine_duration_scale := (size - min_combine_radius) / (max_combine_radius - min_combine_radius)
+	var bubble_combine_duration := lerpf(min_combine_duration, max_combine_duration, combine_duration_scale)
+	bubble_combine_duration = clampf(bubble_combine_duration, min_combine_duration, max_combine_duration)
+	print_debug("Combine duration: ", bubble_combine_duration)
+	
+	# Animate the size and color
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(%Bubble, "base_scale", new_scale, bubble_combine_duration)
+	tween.tween_property(self, "color", new_color, bubble_combine_duration)
+	tween.play()
+	
+	# Calculate an acceleration & deceleration
+	# d = (1/2) * a * t²
+	# d = (1/2) * a * t²
+	# 2*d / t² = a
+	# Where d is distance (in this case, 1/2 the distance, since we're speeding then slowing)
+	#	and t is time (in this case, 1/2 the time, same deal)
+	var desired_movement := (bubble.global_position - global_position).normalized() * size / 2
+	var distance := desired_movement.length()/2
+	var time := bubble_combine_duration/2
+	var accel_amount := 2*distance / pow(time, 2)
+	var accel := accel_amount * desired_movement.normalized()
+	var force := accel * mass # mass is currently just 1, but that could change
+	
+	# Apply the acceleration, then deceleration
+	# Final accel is slightly lower to account for air resistance
+	add_constant_central_force(force)
+	get_tree().create_timer(bubble_combine_duration/2, false).timeout.connect(func():
+		add_constant_central_force(-force)
+		add_constant_central_force(-force*0.9)
+		get_tree().create_timer(bubble_combine_duration/2, false).timeout.connect(func():
+			add_constant_central_force(force*0.9)
+			)
+		)
+	
+	# Calculate a stretch amount
+	var desired_stretch_distance := size / 3
+	var required_stretch_percent:float = desired_stretch_distance / get_radius()
+	var stretch_direction := (bubble.global_position - global_position).normalized()
+	var spring_const := Bubble.get_spring_constant_for_period(bubble_combine_duration*4)
+	var starting_speed := Bubble.get_speed_for_distance(required_stretch_percent, spring_const)
+	%Bubble.add_wobble(starting_speed, spring_const, 0.8, stretch_direction)
+	
 
 func get_radius() -> float:
-	return %Bubble.shape.radius * %Bubble.base_scale
+	return %Bubble.shape.radius * current_scale
 
 func play_sound(base_player:AudioStreamPlayer):
 	# Allow many sounds at the same time

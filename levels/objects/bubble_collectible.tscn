@@ -7,7 +7,6 @@
 linear_damp = 0.4
 script = ExtResource("1_wcy0w")
 color = Color(0.65098, 0.611765, 1, 1)
-is_required_to_complete_level = null
 
 [node name="BubbleCollision" parent="." instance=ExtResource("4_uqc27")]
 unique_name_in_owner = true

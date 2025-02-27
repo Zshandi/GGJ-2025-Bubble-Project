@@ -26,7 +26,7 @@ func _collectible_on_collected():
 func level_complete():
 	if !is_inside_tree(): return
 	complete_timeout_started.emit()
-	await get_tree().create_timer(complete_wait_seconds).timeout
+	await get_tree().create_timer(complete_wait_seconds, false).timeout
 	if !%BubbleCharacter.is_dead:
 		completed.emit()
 		assert(next_level_scene != null)
