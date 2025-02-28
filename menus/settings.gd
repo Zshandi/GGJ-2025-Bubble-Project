@@ -65,6 +65,9 @@ var anti_aliasing := AntiAliasingSetting.NONE:
 				get_viewport().msaa_2d = Viewport.MSAA_8X
 				get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
 
+var music_sample := MusicPlayer.create_audio_player()
+var music_sample_fade:Tween = null
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -81,6 +84,8 @@ func _ready() -> void:
 	%MusicVolumeSlider.set_value_no_signal(music_volume)
 	%SoundVolumeSlider.set_value_no_signal(sound_volume)
 	%AntiAliasingButton.select(anti_aliasing as int)
+	
+	add_child(music_sample)
 
 func update_full_screen_text():
 	if is_full_screen:
@@ -96,6 +101,29 @@ func _on_fullscreen_toggle_pressed() -> void:
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	music_volume = value
 	save_settings()
+	# Play the music sampler
+	if !music_sample.playing:
+		music_sample.play()
+	reset_music_sample_fade()
+	# Fade the volume after delay,
+	#  but allow to cancel it if slider adjusted again
+	music_sample_fade = create_tween()
+	music_sample_fade.tween_interval(5)
+	music_sample_fade.tween_callback(func():print_debug("fade start"))
+	music_sample_fade.tween_property(music_sample, "volume_db", linear_to_db(0.001), 2)
+	music_sample_fade.tween_callback(func():print_debug("fade complete"))
+	music_sample_fade.play()
+	await music_sample_fade.finished
+	print_debug("fade finished")
+	music_sample.stop()
+	reset_music_sample_fade()
+
+func reset_music_sample_fade():
+	print_debug("fade reset")
+	music_sample.volume_db = linear_to_db(1)
+	if music_sample_fade != null:
+		music_sample_fade.stop()
+		music_sample_fade = null
 
 func _on_sound_volume_slider_value_changed(value: float) -> void:
 	sound_volume = value
@@ -106,6 +134,8 @@ func _on_anti_aliasing_button_item_selected(index: int) -> void:
 	save_settings()
 
 func _on_back_pressed() -> void:
+	music_sample.stop()
+	reset_music_sample_fade()
 	back_button_pressed.emit()
 
 
