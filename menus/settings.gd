@@ -19,20 +19,18 @@ var sound_volume:float:
 		var index = AudioServer.get_bus_index(&"Master")
 		AudioServer.set_bus_volume_db(index, linear_to_db(value))
 
+var last_windowed_mode := DisplayServer.WINDOW_MODE_WINDOWED
+
 var is_full_screen:bool:
 	get:
 		return DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	set(value):
-		if (value): DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-
-@export
-# This is an editor-only value used to conveniently clear the data for testing
-var clear_settings:bool:
-	get: return false
-	set(value):
-		print_debug("Deleting settings file...")
-		DirAccess.remove_absolute("user://settings")
+		if value == is_full_screen: return
+		if (value):
+			last_windowed_mode = DisplayServer.window_get_mode()
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(last_windowed_mode)
 
 enum AntiAliasingSetting
 {
@@ -152,7 +150,8 @@ func save_settings() -> void:
 
 func load_settings() -> void:
 	if !FileAccess.file_exists("user://settings"):
-		# If no settings have been changed, leave values as default
+		# If no settings have been saved, leave values as default
+		print_debug("Loading default settings...")
 		return
 	
 	var save_file := FileAccess.open("user://settings", FileAccess.READ)
@@ -161,5 +160,12 @@ func load_settings() -> void:
 	music_volume = save_dict["music_volume"]
 	sound_volume = save_dict["sound_volume"]
 	is_full_screen = save_dict["is_full_screen"]
-	if save_dict.has("anti_aliasing"):
-		anti_aliasing = save_dict["anti_aliasing"]
+	anti_aliasing = save_dict["anti_aliasing"]
+
+@export
+# This is an editor-only value used to conveniently clear the data for testing
+var clear_settings:bool:
+	get: return false
+	set(value):
+		print_debug("Deleting settings file...")
+		DirAccess.remove_absolute("user://settings")
