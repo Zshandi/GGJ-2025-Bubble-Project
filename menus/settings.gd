@@ -123,9 +123,19 @@ func reset_music_sample_fade():
 		music_sample_fade.stop()
 		music_sample_fade = null
 
+var sound_play_delay = false
+
 func _on_sound_volume_slider_value_changed(value: float) -> void:
 	sound_volume = value
 	save_settings()
+	# Play a sound if we haven't recently
+	if !sound_play_delay:
+		if randf() > 0.4:
+			SoundPlayer.play_bubble_collect()
+		else: SoundPlayer.play_bubble_movement()
+		sound_play_delay = true
+		await get_tree().create_timer(0.13).timeout
+		sound_play_delay = false
 
 func _on_anti_aliasing_button_item_selected(index: int) -> void:
 	anti_aliasing = index as AntiAliasingSetting

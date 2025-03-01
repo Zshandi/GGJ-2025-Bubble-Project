@@ -19,6 +19,7 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 MusicPlayer="*res://music_player.gd"
+SoundPlayer="*res://sound_player.gd"
 
 [display]
 
