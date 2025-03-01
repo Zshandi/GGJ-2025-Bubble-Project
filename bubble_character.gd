@@ -109,12 +109,19 @@ func die():
 	is_dead = true
 	died.emit()
 	get_tree().paused = true
+	MusicPlayer.pause()
+	
+	# Hit stop!
 	await get_tree().create_timer(0.5).timeout
+	# Pop it
 	%Bubble.process_mode = PROCESS_MODE_ALWAYS
 	%Bubble.pop()
 	await %Bubble.pop_finished
 	await get_tree().create_timer(1).timeout
+	
+	# Resume and reload
 	get_tree().paused = false
+	MusicPlayer.play()
 	get_tree().reload_current_scene()
 
 static func size_to_area(radius:float) -> float:

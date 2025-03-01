@@ -1,27 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://c57vufx02psb"]
+[gd_scene load_steps=11 format=3 uid="uid://c57vufx02psb"]
 
-[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_84cx4"]
-[ext_resource type="Script" path="res://menus/bubble_button.gd" id="2_evp34"]
-[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="3_4oe28"]
-[ext_resource type="AudioStream" uid="uid://cdyrlc4hp7d8m" path="res://assets/sounds/applause.wav" id="7_2laie"]
-[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="7_80gmw"]
+[ext_resource type="Script" path="res://menus/end.gd" id="1_r0ywy"]
+[ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="2_rrhx2"]
+[ext_resource type="Script" path="res://menus/bubble_button.gd" id="3_h5m7k"]
+[ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="4_rs7bb"]
+[ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="5_yyxa8"]
+[ext_resource type="AudioStream" uid="uid://cdyrlc4hp7d8m" path="res://assets/sounds/applause.wav" id="6_enihl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1phlx"]
-font = ExtResource("7_80gmw")
+font = ExtResource("5_yyxa8")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_l72eu"]
-font = ExtResource("7_80gmw")
+font = ExtResource("5_yyxa8")
 font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_bfhog"]
-font = ExtResource("7_80gmw")
+font = ExtResource("5_yyxa8")
 font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_qddsd"]
 font_size = 20
 
 [node name="End" type="Node2D"]
+script = ExtResource("1_r0ywy")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -39,18 +41,18 @@ offset_bottom = 3000.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.00163265
-texture = ExtResource("2_84cx4")
+texture = ExtResource("2_rrhx2")
 expand_mode = 2
 stretch_mode = 1
 
 [node name="BubbleButton" type="Area2D" parent="."]
 position = Vector2(964, 520)
-script = ExtResource("2_evp34")
+script = ExtResource("3_h5m7k")
 load_scene_path = "res://menus/title_menu.tscn"
 wobble_push_on_mouse = true
 wobble_push_divisor = 6000
 
-[node name="BubbleCollision" parent="BubbleButton" instance=ExtResource("3_4oe28")]
+[node name="BubbleCollision" parent="BubbleButton" instance=ExtResource("4_rs7bb")]
 scale = Vector2(10, 10)
 color = Color(0.57653, 0.598109, 0.872857, 1)
 base_scale = 10.0
@@ -112,7 +114,7 @@ label_settings = SubResource("LabelSettings_qddsd")
 horizontal_alignment = 1
 
 [node name="Applause" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_2laie")
+stream = ExtResource("6_enihl")
 autoplay = true
 
 [connection signal="mouse_entered" from="BubbleButton" to="BubbleButton" method="_on_mouse_entered"]

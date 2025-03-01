@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b3riarhbbwn8y" path="res://levels/level_base.tscn" id="1_fc2eu"]
 [ext_resource type="PackedScene" uid="uid://cij06vhna703f" path="res://levels/objects/bubble_collectible.tscn" id="2_1t1tm"]
-[ext_resource type="PackedScene" uid="uid://c57vufx02psb" path="res://levels/END.tscn" id="2_htsx4"]
+[ext_resource type="PackedScene" uid="uid://c57vufx02psb" path="res://menus/END.tscn" id="2_htsx4"]
 [ext_resource type="PackedScene" uid="uid://nvdk5rbg4euh" path="res://levels/objects/wall_200x50.tscn" id="3_c2pxj"]
 [ext_resource type="PackedScene" uid="uid://4c7anriputsx" path="res://levels/objects/wall_400x100.tscn" id="4_ix82y"]
 [ext_resource type="FontFile" uid="uid://ds43aokq4oub6" path="res://assets/fonts/baby-gemoy/Baby Gemoy.ttf" id="5_u3vxy"]
