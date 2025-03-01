@@ -42,6 +42,16 @@ func _ready() -> void:
 	freeze = true
 	is_starting = true
 	
+	print_debug("Vector2.LEFT.angle_to(Vector2.UP) = ", Vector2.LEFT.angle_to(Vector2.UP))
+	print_debug("Vector2.UP.angle_to(Vector2.RIGHT) = ", Vector2.UP.angle_to(Vector2.RIGHT))
+	print_debug("Vector2.RIGHT.angle_to(Vector2.DOWN) = ", Vector2.RIGHT.angle_to(Vector2.DOWN))
+	print_debug("Vector2.DOWN.angle_to(Vector2.LEFT) = ", Vector2.DOWN.angle_to(Vector2.LEFT))
+	
+	print_debug("Vector2.UP.angle_to(Vector2.LEFT) = ", Vector2.UP.angle_to(Vector2.LEFT))
+	print_debug("Vector2.RIGHT.angle_to(Vector2.UP) = ", Vector2.RIGHT.angle_to(Vector2.UP))
+	print_debug("Vector2.DOWN.angle_to(Vector2.RIGHT) = ", Vector2.DOWN.angle_to(Vector2.RIGHT))
+	print_debug("Vector2.LEFT.angle_to(Vector2.DOWN) = ", Vector2.LEFT.angle_to(Vector2.DOWN))
+	
 	print_debug("Starting scale: ", %Bubble.global_scale)
 	print_debug("Starting hue: ", %Bubble.color.h)
 	
