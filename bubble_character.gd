@@ -45,6 +45,7 @@ func _ready() -> void:
 	print_debug("Starting scale: ", %Bubble.global_scale)
 	print_debug("Starting hue: ", %Bubble.color.h)
 	
+	# Unit(ish) tests
 	assert(is_equal_approx(0.5, size_to_area(area_to_size(0.5))))
 	assert(is_equal_approx(0.5, area_to_size(size_to_area(0.5))))
 	assert(is_equal_approx(1, size_to_area(area_to_size(1))))
@@ -82,7 +83,7 @@ func _process(_delta: float) -> void:
 		var direction = get_normalized_direction()
 		
 		apply_central_impulse(direction * bubble_speed)
-		play_sound(%AudioPlayer_Move)
+		SoundPlayer.play_bubble_movement()
 		
 		add_wobble(direction)
 	
@@ -97,7 +98,7 @@ func _process(_delta: float) -> void:
 			get_tree().root.add_child(bubble)
 			bubble.owner = get_tree().root
 			bubble.global_position = get_global_mouse_position()
-			play_sound(%AudioPlayer_Move)
+			SoundPlayer.play_bubble_movement()
 		
 		if Input.is_action_just_pressed("reset_size"):
 			%Bubble.base_scale = starting_scale
@@ -109,12 +110,19 @@ func die():
 	is_dead = true
 	died.emit()
 	get_tree().paused = true
+	MusicPlayer.pause()
+	
+	# Hit stop!
 	await get_tree().create_timer(0.5).timeout
+	# Pop it
 	%Bubble.process_mode = PROCESS_MODE_ALWAYS
 	%Bubble.pop()
 	await %Bubble.pop_finished
 	await get_tree().create_timer(1).timeout
+	
+	# Resume and reload
 	get_tree().paused = false
+	MusicPlayer.play()
 	get_tree().reload_current_scene()
 
 static func size_to_area(radius:float) -> float:
@@ -149,7 +157,7 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 	print_debug("New color: ", color)
 	print_debug("New HSV: (", color.h*360, ", ", color.s*100, ", ", color.v*100, ")")
 	
-	play_sound(%AudioPlayer_Collect)
+	SoundPlayer.play_bubble_collect()
 	
 	var combine_duration_scale := (size - min_combine_radius) / (max_combine_radius - min_combine_radius)
 	var bubble_combine_duration := lerpf(min_combine_duration, max_combine_duration, combine_duration_scale)
@@ -197,12 +205,3 @@ func collect_bubble(size: float, bubble:BubbleCollectible):
 
 func get_radius() -> float:
 	return %Bubble.shape.radius * current_scale
-
-func play_sound(base_player:AudioStreamPlayer):
-	# Allow many sounds at the same time
-	var player := base_player.duplicate() as AudioStreamPlayer
-	add_child(player)
-	player.pitch_scale *= randf_range(0.8, 1.2)
-	player.play()
-	await player.finished
-	player.queue_free()

@@ -23,9 +23,6 @@ color = Color(0.61, 0.87, 1, 1)
 [node name="Bubble" parent="." instance=ExtResource("2_tnuj6")]
 unique_name_in_owner = true
 color = Color(0.61, 0.87, 1, 1)
-wobble_anim_scale = 1.0
-max_stretch = 0.5
-should_print_debug = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

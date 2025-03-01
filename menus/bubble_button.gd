@@ -8,10 +8,29 @@ var wobble_push_on_mouse := false
 @export
 var wobble_push_divisor := 1200
 
-
 var mouse_velocity := Vector2.ZERO
 var mouse_over := false
 var mouse_was_over := false
+
+const max_push_timeouts := 3
+const push_timeout_seconds := 1.5
+
+var push_timeouts:Array[float] = []
+
+func add_push_timeout() -> bool:
+	if push_timeouts.size() < max_push_timeouts:
+		push_timeouts.push_back(push_timeout_seconds)
+		return true
+	return false
+
+func _process(delta: float) -> void:
+	var i := 0
+	while i < push_timeouts.size():
+		push_timeouts[i] -= delta
+		if push_timeouts[i] < 0:
+			push_timeouts.remove_at(i)
+		else:
+			i += 1
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && mouse_over:
@@ -29,9 +48,13 @@ func _input(event: InputEvent) -> void:
 		
 		if wobble_push_on_mouse and mouse_over != mouse_was_over:
 			mouse_was_over = mouse_over
+			
+			# Limit pushing
+			if !add_push_timeout():
+				return
+			
 			var speed = mouse_velocity.length()
 			if not mouse_over: speed = -speed
-			print_debug("Mouse over button, speed: ", speed)
 			$BubbleCollision.add_wobble_push(mouse_velocity, speed / wobble_push_divisor)
 			
 

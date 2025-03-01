@@ -42,12 +42,14 @@ func toggle_paused():
 		%Pause.show()
 		is_paused = true
 		get_tree().paused = true
+		MusicPlayer.pause()
 	elif is_paused:
 		show_button()
 		%Pause.hide()
 		is_paused = false
 		get_tree().paused = false
 		_on_settings_back_button_pressed()
+		MusicPlayer.play()
 
 func _ready():
 	# In case I am editing it and forget to re-set the visibilities
