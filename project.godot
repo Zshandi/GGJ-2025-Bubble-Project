@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bloopy Bubble"
-config/version="0.0.3"
+config/version="0.1.0"
 run/main_scene="res://menus/title_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://assets/icon.png"
@@ -29,6 +29,10 @@ window/size/always_on_top=true
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
+
+[editor]
+
+naming/node_name_num_separator=2
 
 [global_group]
 

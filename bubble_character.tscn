@@ -1,13 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdp2ouyl3iaqj"]
+[gd_scene load_steps=4 format=3 uid="uid://cdp2ouyl3iaqj"]
 
 [ext_resource type="Script" path="res://bubble_character.gd" id="1_j311j"]
 [ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="2_tnuj6"]
-[ext_resource type="AudioStream" uid="uid://d3w8ngv721vqr" path="res://assets/sounds/Bubble bloop.wav" id="5_fpmrs"]
-[ext_resource type="AudioStream" uid="uid://bkcsobydf2has" path="res://assets/sounds/Bubble bloop high (echo).wav" id="6_turd1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmubp"]
 friction = 0.0
 bounce = 1.0
+absorbent = true
 
 [node name="BubbleCharacter" type="RigidBody2D"]
 mass = 0.4
@@ -25,12 +24,3 @@ unique_name_in_owner = true
 color = Color(0.61, 0.87, 1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="AudioPlayer_Move" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("5_fpmrs")
-
-[node name="AudioPlayer_Collect" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("6_turd1")
-volume_db = 6.029
