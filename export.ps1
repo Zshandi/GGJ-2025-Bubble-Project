@@ -4,7 +4,9 @@ param (
     [Switch]
     $DebugExport,
     [Switch]
-    $NoVersionIncrement
+    $NoVersionIncrement,
+    [Switch]
+    $VersionIncrement
 )
 
 $project_name_key = "config/name"
@@ -22,6 +24,8 @@ $exports_base_dir = $config.exports_base_dir
 
 $godot_command = $config.godot_command
 $additional_command_args = $config.additional_args
+
+$increment_version_config = $config.increment_version -eq "true"
 
 if (!(Test-Path -PathType Leaf .\project.godot))
 {
@@ -58,6 +62,17 @@ if ($version_groups)
     $project_version = $version_groups[1].Value
     $version_string = "$version_prefix$project_version"
 
+    $should_increment_version = $increment_version_config
+
+    if ($NoVersionIncrement)
+    {
+        should_increment_version = $false
+    }
+    elseif ($VersionIncrement)
+    {
+        should_increment_version = $true
+    }
+
     # If on non-main branch, append the commit number
     if ((git rev-parse --abbrev-ref HEAD) -ne $git_main_branch -or $DebugExport)
     {
@@ -65,9 +80,9 @@ if ($version_groups)
 
         $version_string = "$version_string $commit"
     }
-    elseif (!$NoVersionIncrement)
+    # Only increment version if on main branch and set to do so
+    elseif ($should_increment_version)
     {
-        # Update the version if on main branch
         $rev_number = $version_groups[3].Value
         $rest = $version_groups[2].Value
 

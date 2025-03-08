@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://s1caqq5bshwr"]
+[gd_scene load_steps=11 format=3 uid="uid://s1caqq5bshwr"]
 
 [ext_resource type="Script" path="res://menus/title_menu.gd" id="1_473on"]
 [ext_resource type="Texture2D" uid="uid://codlc2uml50p6" path="res://assets/textures/Tiles/Tile1.png" id="1_q1h7p"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://menus/bubble_button.gd" id="3_6ap3j"]
 [ext_resource type="PackedScene" uid="uid://jot0khtaj6dd" path="res://bubble.tscn" id="4_nw0hq"]
 [ext_resource type="PackedScene" uid="uid://cfydejf68tu5j" path="res://menus/settings.tscn" id="6_1d4kf"]
+[ext_resource type="Script" path="res://menus/version.gd" id="7_u8h2l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i03p4"]
 font = ExtResource("2_xhrdw")
@@ -47,41 +48,46 @@ position = Vector2(970, 221)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="OuterMargin" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 180
-theme_override_constants/margin_bottom = 90
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="Container" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="InnerMargin" type="MarginContainer" parent="CanvasLayer/OuterMargin"]
+layout_mode = 2
+theme_override_constants/margin_top = 165
+theme_override_constants/margin_bottom = 75
+
+[node name="Container" type="VBoxContainer" parent="CanvasLayer/OuterMargin/InnerMargin"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Title" type="Label" parent="CanvasLayer/MarginContainer/Container"]
+[node name="Title" type="Label" parent="CanvasLayer/OuterMargin/InnerMargin/Container"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Bloopy Bubble"
 label_settings = SubResource("LabelSettings_i03p4")
 horizontal_alignment = 1
 
-[node name="MainMenu" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Container"]
+[node name="MainMenu" type="HBoxContainer" parent="CanvasLayer/OuterMargin/InnerMargin/Container"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_constants/separation = 70
 
-[node name="PlayButton" type="Area2D" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+[node name="PlayButton" type="Area2D" parent="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu"]
 position = Vector2(535, -320)
 script = ExtResource("3_6ap3j")
 load_scene_path = "res://levels/level1.tscn"
 wobble_push_on_mouse = true
 wobble_push_divisor = 2500
 
-[node name="BubbleCollision" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" instance=ExtResource("4_nw0hq")]
+[node name="BubbleCollision" parent="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton" instance=ExtResource("4_nw0hq")]
 scale = Vector2(5, 5)
 color = Color(0.41, 0.803333, 1, 1)
 base_scale = 5.0
@@ -89,7 +95,7 @@ wobble_on_ready = true
 wobble_anim_scale = 0.5
 max_stretch = 0.2
 
-[node name="Play" type="Label" parent="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton"]
+[node name="Play" type="Label" parent="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -104,7 +110,7 @@ grow_vertical = 2
 text = "Play!"
 label_settings = SubResource("LabelSettings_xwkvl")
 
-[node name="Settings" type="Button" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+[node name="Settings" type="Button" parent="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu"]
 custom_minimum_size = Vector2(500, 70)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_xhrdw")
@@ -112,32 +118,38 @@ theme_override_font_sizes/font_size = 42
 text = "Settings
 "
 
-[node name="Exit" type="Button" parent="CanvasLayer/MarginContainer/Container/MainMenu"]
+[node name="Exit" type="Button" parent="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu"]
 custom_minimum_size = Vector2(500, 70)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_xhrdw")
 theme_override_font_sizes/font_size = 42
 text = "Quit Game"
 
-[node name="SettingsMenu" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Container"]
+[node name="SettingsMenu" type="VBoxContainer" parent="CanvasLayer/OuterMargin/InnerMargin/Container"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 80
 
-[node name="SettingsTitle" type="Label" parent="CanvasLayer/MarginContainer/Container/SettingsMenu"]
+[node name="SettingsTitle" type="Label" parent="CanvasLayer/OuterMargin/InnerMargin/Container/SettingsMenu"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Settings"
 label_settings = SubResource("LabelSettings_4lx2g")
 horizontal_alignment = 1
 
-[node name="Settings" parent="CanvasLayer/MarginContainer/Container/SettingsMenu" instance=ExtResource("6_1d4kf")]
+[node name="Settings" parent="CanvasLayer/OuterMargin/InnerMargin/Container/SettingsMenu" instance=ExtResource("6_1d4kf")]
 layout_mode = 2
 
-[connection signal="mouse_entered" from="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" to="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" to="CanvasLayer/MarginContainer/Container/MainMenu/PlayButton" method="_on_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/Container/MainMenu/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/Container/MainMenu/Exit" to="." method="_on_exit_pressed"]
-[connection signal="back_button_pressed" from="CanvasLayer/MarginContainer/Container/SettingsMenu/Settings" to="." method="_on_settings_back_button_pressed"]
+[node name="Version" type="Label" parent="CanvasLayer/OuterMargin"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "v0.2.0"
+script = ExtResource("7_u8h2l")
+
+[connection signal="mouse_entered" from="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton" to="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton" to="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/PlayButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/OuterMargin/InnerMargin/Container/MainMenu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="back_button_pressed" from="CanvasLayer/OuterMargin/InnerMargin/Container/SettingsMenu/Settings" to="." method="_on_settings_back_button_pressed"]
